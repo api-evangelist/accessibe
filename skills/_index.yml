@@ -1,0 +1,30 @@
+generated: '2026-07-31'
+method: generated
+source: openapi/accessibe-partners-openapi-original.yml + mcp/accessibe-mcp.yml
+note: accessiBe's OpenAPI declares no operationIds, so the REST skills are grounded in
+  the real method + path pairs from the specification. The operationIds referenced in
+  those skills are assigned by overlays/accessibe-partners-overlay.yaml and are marked
+  as such.
+skills:
+- file: accessibe-provision-accesswidget-license.md
+  name: Provision an accessWidget license for a domain
+  api: openapi/accessibe-partners-openapi-original.yml
+  operations:
+  - GET /accounts/{accountId}/access-widget-licenses
+  - POST /accounts/{accountId}/access-widget-licenses
+  - PATCH /accounts/{accountId}/access-widget-licenses/{licenseId}
+  - GET /accounts/{accountId}/access-widget-licenses/{licenseId}
+- file: accessibe-bulk-license-batch.md
+  name: Bulk-create or bulk-update accessWidget licenses safely
+  api: openapi/accessibe-partners-openapi-original.yml
+  operations:
+  - POST /accounts/{accountId}/access-widget-licenses/batch-create
+  - POST /accounts/{accountId}/access-widget-licenses/batch-update
+  - GET /accounts/{accountId}/access-widget-licenses/batch/{batchId}
+- file: accessibe-accessflow-remediation.md
+  name: Triage and remediate accessibility issues with the accessFlow MCP server
+  api: mcp/accessibe-mcp.yml
+  operations:
+  - getMostUrgentIssues
+  - getIssueRemediation
+  - resolveIssue

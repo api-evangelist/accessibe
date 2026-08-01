@@ -1,0 +1,107 @@
+generated: '2026-07-31'
+method: derived
+source: openapi/accessibe-partners-openapi-original.yml
+api: accessiBe Partners API License 1.0.1
+entities:
+- name: Account
+  id_field: accountId
+  type: string
+  described_in_spec: false
+  note: The account is a path-scoped container, not a returned schema. Its ID is found
+    in the Customer Portal under Account Settings - Account and user details.
+  operations: [all]
+- name: License
+  schema: '#/components/schemas/License'
+  id_field: id
+  represents: one accessWidget license bound to one domain
+  key_fields:
+  - {name: id, type: string}
+  - {name: domain, type: string}
+  - {name: status, type: enum, values: [active, grace, expired, trial]}
+  - {name: date, type: date-time}
+  - {name: relatedAccountId, type: string}
+  - {name: relatedBillingId, type: string, nullable: true}
+  - {name: price, type: number}
+  - {name: licenseType, type: string}
+  - {name: statementDate, type: date-time}
+  - {name: dateTrialExpires, type: date-time}
+  - {name: datePlanExpires, type: date-time, nullable: true}
+  - {name: datePlanFirstActivated, type: date-time, nullable: true}
+  - {name: lastSubscriptionPaymentId, type: string, nullable: true}
+  - {name: monthly, type: boolean}
+  - {name: autoRenew, type: boolean}
+  - {name: enableGoogleAnalytics, type: boolean}
+  - {name: enableRemediationReport, type: boolean}
+  - {name: contactName, type: string, nullable: true}
+  - {name: contactEmail, type: string, nullable: true}
+  - {name: contactPhone, type: string, nullable: true}
+  - {name: contactCountry, type: string, nullable: true}
+  - {name: maxImagesReached, type: boolean, read_only: true, expand_only: true}
+  - {name: maxImagesLimit, type: number, read_only: true, expand_only: true}
+- name: Plan
+  schema: '#/components/schemas/Plan'
+  represents: the commercial plan a license is on
+  fields: [name, planSKU]
+  sku_map:
+    '1': Standard
+    '2': Advanced Plus
+    '3': Enterprise
+    '5': Advanced
+    '21': Micro
+    '22': Growth
+    '23': Scale
+- name: LicenseSettings
+  schema: '#/components/schemas/LicenseSettings'
+  represents: accessWidget customization settings attached to a license
+  fields: [leadColor, language, position, triggerColor, triggerPositionX,
+    triggerPositionY, triggerSize, triggerRadius, hideTrigger, triggerOffsetX,
+    triggerOffsetY, triggerIcon, hideMobile, mobile, statementLink, footerHtml]
+  returned_when: the expand[]=settings query parameter is supplied
+- name: BatchOperation
+  schema: '#/components/schemas/GetBatchStatus'
+  id_field: batchId
+  represents: an asynchronous batch create or batch update job of up to 150 licenses
+  fields: [batchId, operation, status, hasErrors, total, totalSuccesses,
+    totalFailures, successLicenses, failedLicenses]
+  status_enum: [processing, completed]
+  operation_enum: [create, update]
+  per_row_results: successLicenses[] carries {domain, licenseId, getLicenseURL};
+    failedLicenses[] carries {domain, message}
+relationships:
+- from: Account
+  to: License
+  kind: has_many
+  via: accountId (path) / License.relatedAccountId
+- from: License
+  to: Account
+  kind: belongs_to
+  via: relatedAccountId
+- from: License
+  to: Plan
+  kind: has_one
+  via: plan ($ref)
+- from: License
+  to: LicenseSettings
+  kind: has_one
+  via: settings ($ref, expand-gated)
+- from: Account
+  to: BatchOperation
+  kind: has_many
+  via: accountId (path) / batchId
+- from: BatchOperation
+  to: License
+  kind: has_many
+  via: licenses[] in the batch request body
+request_schemas:
+- {name: CreateLicense, used_by: 'POST /accounts/{accountId}/access-widget-licenses,
+    POST .../batch-create'}
+- {name: UpdateLicense, used_by: 'PATCH /accounts/{accountId}/access-widget-licenses/{licenseId},
+    POST .../batch-update'}
+- {name: CreateSettings, used_by: CreateLicense.settings}
+- {name: UpdateSettings, used_by: UpdateLicense.settings}
+- {name: LicenseCreateOrUpdateResponse, used_by: create and update responses}
+uniqueness_constraints:
+- One active license per domain per account; violating it returns 409 with message
+  "Domain already being used" or "Domain already exists in account".
+id_prefixes:
+  documented: false

@@ -1,0 +1,82 @@
+generated: '2026-07-31'
+method: searched
+source: https://support.accessibe.com/hc/en-us/categories/15274937179922-Release-Notes
+scheme: dated-product-release-notes
+note: accessiBe publishes release notes per product in its Zendesk help centre rather
+  than a single versioned API changelog. Article titles are date-prefixed (YYYY-MM-DD).
+  The Partners API itself carries no changelog; its only version signal is the
+  OpenAPI info.version (1.0.1). The help-centre host is Cloudflare-protected and
+  could not be fetched directly at harvest time, so the entries below are the
+  section titles and dated article headlines surfaced through search rather than a
+  full scrape.
+current_version:
+  api: Partners API License
+  version: 1.0.1
+  spec: openapi/accessibe-partners-openapi-original.yml
+sections:
+- name: accessWidget Release Notes
+  url: https://support.accessibe.com/hc/en-us/sections/17024924433042-accessWidget-Release-Notes
+- name: accessFlow Release Notes
+  url: https://support.accessibe.com/hc/en-us/sections/17817223393298-accessFlow-Release-Notes
+- name: accessScan Release Notes
+  url: https://support.accessibe.com/hc/en-us/sections/22249563601298-accessScan-Release-Notes
+- name: Customer Portal Release Notes
+  url: https://support.accessibe.com/hc/en-us/sections/22254403593490-Customer-Portal-Release-Notes
+entries:
+- date: '2026-03-06'
+  product: accessWidget
+  title: Older adults profile
+  kind: addition
+- date: '2025-12-23'
+  product: accessWidget
+  title: Introducing our new Joomla! app
+  kind: addition
+- date: '2025-12-17'
+  product: accessWidget
+  title: Support for WCAG 2.2 Accessible Authentication
+  kind: addition
+- date: '2025-12-14'
+  product: accessWidget
+  title: Support for WCAG 2.2 Consistent Help
+  kind: addition
+- date: '2025-10-16'
+  product: accessFlow
+  title: Expanded product tour
+  kind: addition
+- date: '2025-08-07'
+  product: accessFlow
+  title: AI-powered alt text suggestions
+  kind: addition
+- date: '2025-08-05'
+  product: accessFlow
+  title: Detailed audit failure insights
+  kind: addition
+- date: '2025-07-30'
+  product: accessFlow
+  title: Fix issues instantly with Auto-resolve
+  kind: addition
+- date: '2025-06-18'
+  product: Customer Portal
+  title: Archiving expired licenses
+  kind: addition
+- date: '2025-05-14'
+  product: Customer Portal
+  title: Search filters on My Licenses
+  kind: addition
+- date: '2024-12-31'
+  product: Customer Portal
+  title: Instant widget customizations
+  kind: addition
+- date: '2024-10-15'
+  product: accessWidget
+  title: Introducing our redesigned Remediation Report for accessWidget
+  kind: change
+- date: '2024-10-11'
+  product: accessScan
+  title: Redesigned report for accessScan
+  kind: change
+- date: '2024-07-07'
+  product: accessScan
+  title: Expanded detection of accessibility widgets
+  kind: addition
+breaking_changes: []

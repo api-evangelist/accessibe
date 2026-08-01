@@ -1,0 +1,41 @@
+generated: '2026-07-31'
+method: searched
+probe: true
+source: https://accessibe.com/security
+url: https://trust.accessibe.com
+pages:
+- url: https://accessibe.com/security
+  title: Security & Compliance
+  http_status: 200
+- url: https://trust.accessibe.com
+  title: Trust Center
+  http_status: 200
+  platform: anecdotes (trustcenter.anecdotes.ai)
+  note: Client-rendered single-page application; the certification list is not present
+    in the served HTML and was not machine-readable at probe time.
+certifications:
+- SOC 2
+- GDPR
+security_practices:
+- Data protection and loss prevention
+- Secure and reliable infrastructure
+- Monitoring and threat prevention
+- Code integrity and access controls
+- Resilient application architecture
+- Operational security governance
+evidence:
+- source: https://accessibe.com/security
+  keywords:
+  - soc2
+  - trust center
+  - compliance certification
+  - gdpr
+  quote: A pioneer in SOC2 compliance for digital accessibility.
+- source: https://trust.accessibe.com
+  kind: trust-center
+  http_status: 200
+vulnerability_disclosure: none-found
+vulnerability_disclosure_note: No /.well-known/security.txt, responsible-disclosure
+  page, or public bug bounty program (HackerOne / Bugcrowd / Intigriti) was found on
+  any accessiBe host at probe time, so no VulnerabilityDisclosure or Security pointer
+  is emitted.

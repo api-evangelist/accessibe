@@ -1,0 +1,80 @@
+generated: '2026-07-31'
+method: derived
+source: openapi/accessibe-partners-openapi-original.yml + https://accessibe.com/security
+  + https://accessibe.com/compliance
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: openapi/accessibe-partners-openapi-original.yml declares openapi 3.0.0
+    with 7 operations across 4 paths and parses cleanly.
+- id: apikey-auth
+  conforms: true
+  evidence: components.securitySchemes.X-API-Key is type apiKey, in header.
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme in the specification; the accessFlow MCP server
+    uses a static bearer token and publishes no OAuth discovery documents.
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors are returned as application/json with a {success, message} envelope,
+    not application/problem+json.
+- id: idempotency-key
+  conforms: partial
+  evidence: An Idempotency-Key request header is declared on the two batch endpoints
+    only; single-resource POST and PATCH declare none.
+- id: cursor-pagination
+  conforms: true
+  evidence: GET /accounts/{accountId}/access-widget-licenses accepts nextToken and
+    limit and returns nextToken.
+- id: rfc8594-sunset
+  conforms: false
+  evidence: No Sunset or Deprecation header support is documented.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every accessiBe host.
+- id: mcp
+  conforms: true
+  evidence: First-party accessFlow MCP server published as npm accessflow-mcp-server
+    with stdio and hosted HTTP transports; POST tools/list to
+    https://flow-mcp.accessibe.com/mcp returned 401 (auth-gated, server live).
+- id: a2a
+  conforms: false
+  evidence: No agent card at /.well-known/agent-card.json or /.well-known/agent.json
+    on any host.
+- id: asyncapi
+  conforms: false
+  evidence: accessiBe publishes no event, streaming or first-party webhook surface;
+    accessFlow consumes Jira Cloud webhooks rather than emitting its own.
+- id: llms-txt
+  conforms: true
+  evidence: https://accessibe.com/llms.txt returns 200 with a structured llms.txt
+    document (16.9 KB).
+domain_standards:
+- id: wcag-2.1-aa
+  role: subject
+  conforms: n/a
+  note: WCAG is the standard accessiBe's products remediate against, not a standard
+    its API conforms to. accessWidget targets WCAG 2.1 AA remediation.
+- id: wcag-2.2
+  role: subject
+  note: WCAG 2.2 Accessible Authentication and Consistent Help support shipped in
+    accessWidget in December 2025 (see changelog/accessibe-changelog.yml).
+- id: ada-title-iii
+  role: subject
+- id: section-508
+  role: subject
+- id: en-301-549-eaa
+  role: subject
+- id: aoda
+  role: subject
+- id: vpat-2.x
+  role: subject
+  note: accessiBe authors VPAT documents as a service (https://accessibe.com/vpat).
+compliance_program:
+  published: true
+  url: https://accessibe.com/security
+  trust_center: https://trust.accessibe.com
+  certifications: [SOC 2, GDPR]
+  artifact: security/accessibe-trust-center.yml

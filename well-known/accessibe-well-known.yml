@@ -1,0 +1,63 @@
+generated: '2026-07-31'
+method: probed
+source: live HTTP probes of every accessiBe host in apis.yml
+result: none-found
+note: No /.well-known/ discovery document is published on any accessiBe-controlled
+  host. Hosts that answered 200 for every probed path (trust.accessibe.com,
+  status.accessibe.com, accessflow.accessibe.com) are single-page-application
+  catch-alls returning an HTML shell, not discovery documents, and are recorded as
+  html-catch-all rather than as hits. No raw files were saved and no WellKnown or
+  SecurityTxt pointer is wired.
+hosts:
+- host: accessibe.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 200, file: ../llms/accessibe-llms.txt}
+- host: dashboard.accessibe.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 200, result: html-catch-all}
+  - {path: /.well-known/oauth-authorization-server, status: 200, result: html-catch-all}
+  - {path: /.well-known/oauth-protected-resource, status: 200, result: html-catch-all}
+  - {path: /.well-known/api-catalog, status: 200, result: html-catch-all}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: flow-mcp.accessibe.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: trust.accessibe.com
+  documents:
+  - {path: /.well-known/security.txt, status: 200, result: html-catch-all}
+  - {path: /.well-known/agent-card.json, status: 200, result: html-catch-all}
+  - {path: /.well-known/agent.json, status: 200, result: html-catch-all}
+- host: status.accessibe.com
+  documents:
+  - {path: /.well-known/security.txt, status: 200, result: html-catch-all}
+  - {path: /.well-known/agent-card.json, status: 200, result: html-catch-all}
+  - {path: /.well-known/agent.json, status: 200, result: html-catch-all}
+- host: accessflow.accessibe.com
+  documents:
+  - {path: /.well-known/security.txt, status: 200, result: html-catch-all}
+  - {path: /.well-known/agent-card.json, status: 200, result: html-catch-all}
+  - {path: /.well-known/agent.json, status: 200, result: html-catch-all}
+a2a:
+  agent_card_found: false
+  paths_probed: ['/.well-known/agent-card.json', '/.well-known/agent.json']
+  hosts_probed: [accessibe.com, www.accessibe.com, dashboard.accessibe.com,
+    flow-mcp.accessibe.com, trust.accessibe.com, status.accessibe.com,
+    accessflow.accessibe.com, support.accessibe.com]
+  note: No host returned a JSON object with AgentCard shape. Per pipeline policy no
+    a2a/ artifact was authored.

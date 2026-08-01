@@ -1,0 +1,49 @@
+generated: '2026-07-31'
+method: searched
+source: https://dashboard.accessibe.com/api/v1/partners/docs
+versioning:
+  scheme: uri-path
+  current: v1
+  spec_version: 1.0.1
+  path_prefix: /api/v1/partners
+  policy_url: null
+  note: No published version-support or breaking-change policy was found.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: No deprecation policy, RFC 8594 Sunset/Deprecation header support, or
+    end-of-life schedule is published, and no operation in the OpenAPI is marked
+    deprecated.
+deprecated_operations: []
+status_page:
+  url: https://status.accessibe.com
+  platform: Better Stack (statuspage.betteruptime.com)
+  aggregate_state_at_probe: operational
+  created: '2023-06-21'
+  machine_readable: https://status.accessibe.com/index.json
+  subscriptions: [email, RSS, Atom, JSON, webhook, Slack]
+  components:
+  - group: accessWidget
+    items: [Client Application, Configuration Services, System Services]
+  - group: accessFlow
+    items: [Client Application]
+  - group: accesScan
+    items: [Auditing Services]
+  - group: Customer Portal
+    items: [Portal Client Application]
+  published_uptime:
+    accessWidget Client Application: 99.997%
+sla:
+  url: null
+  uptime_target: null
+  note: No public SLA document was found; uptime percentages are published on the
+    status page but are historical measurements, not a commitment.
+release_notes:
+  url: https://support.accessibe.com/hc/en-us/categories/15274937179922-Release-Notes
+  artifact: changelog/accessibe-changelog.yml
+support:
+  url: https://accessibe.com/support
+  email: support@accessibe.com
+  contact_from_spec: https://support.accessibe.com/hc/en-us
+terms_of_service: https://accessibe.com/terms-of-service

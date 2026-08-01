@@ -1,0 +1,66 @@
+generated: '2026-07-31'
+method: derived
+source: mcp/accessibe-mcp.yml + openapi/accessibe-partners-openapi-original.yml
+summary: accessiBe's MCP surface and its public REST surface are two entirely different
+  products with no overlap. The accessFlow MCP server operates on accessibility audit
+  findings; the Partners API operates on accessWidget license records. Every MCP tool
+  is therefore mcp_only, and every REST operation is rest_only. This is a genuine
+  surface divergence, recorded rather than papered over.
+surfaces:
+  openapi:
+    file: openapi/accessibe-partners-openapi-original.yml
+    product: accessWidget Partners API License 1.0.1
+    base_url: https://dashboard.accessibe.com/api/v1/partners
+    auth: x-api-key header (partner account)
+    gated: false
+    note: The specification is publicly served and parses; calling it requires a
+      partner API key.
+  mcp:
+    url: https://flow-mcp.accessibe.com/mcp
+    package: accessflow-mcp-server
+    product: accessFlow
+    auth: Bearer AI MCP token + X-Domain header
+    gated: true
+    note: tools/list returned HTTP 401 anonymously, so tool inputSchemas were taken
+      from the published package documentation.
+  graphql:
+    present: false
+crosswalk: []
+mcp_only:
+- tool: getMostUrgentIssues
+  reason: Backed by the accessFlow audit platform, which publishes no public REST
+    OpenAPI. There is no Partners API operation that returns accessibility issues.
+- tool: getIssueRemediation
+  reason: Backed by the accessFlow remediation-guidance engine. No public REST
+    equivalent is documented.
+- tool: resolveIssue
+  reason: Mutates accessFlow issue state. No public REST equivalent is documented.
+rest_only:
+- capability: accessWidget license read
+  operations:
+  - GET /accounts/{accountId}/access-widget-licenses
+  - GET /accounts/{accountId}/access-widget-licenses/{licenseId}
+  reason: No MCP tool exposes license data.
+- capability: accessWidget license write
+  operations:
+  - POST /accounts/{accountId}/access-widget-licenses
+  - PATCH /accounts/{accountId}/access-widget-licenses/{licenseId}
+  reason: No MCP tool exposes license provisioning.
+- capability: bulk license operations
+  operations:
+  - POST /accounts/{accountId}/access-widget-licenses/batch-create
+  - POST /accounts/{accountId}/access-widget-licenses/batch-update
+  - GET /accounts/{accountId}/access-widget-licenses/batch/{batchId}
+  reason: No MCP tool exposes batch license operations.
+coverage:
+  tools_named: 3
+  tools_bound_to_rest: 0
+  mcp_only: 3
+  rest_operations_total: 7
+  rest_operations_with_a_tool: 0
+  overlap_percent: 0
+gaps:
+- An agent that manages partner licenses cannot do so through MCP today; it must call
+  the Partners REST API directly with an x-api-key.
+- An agent that reads accessibility findings cannot do so through REST today; there
+  is no published accessFlow OpenAPI.

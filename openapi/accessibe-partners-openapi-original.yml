@@ -1,0 +1,1575 @@
+openapi: 3.0.0
+info:
+  title: Partners API License
+  version: 1.0.1
+  description: |
+    This API allows partners to manage access widget licenses for their accounts.
+    The API requires an API key to authenticate the account and access the endpoints.
+    The API key must be included in the `x-api-key` header of the request.
+    The API key is unique for each account and can be found in the Customer Portal in Account Settings - Subscriptions API/CSV access.
+    The account must be enabled as a partner account to access the endpoints.
+    Each account has a unique accountId which can be found in the Customer Portal in Account Settings - Account and user details.
+  termsOfService: https://accessibe.com/terms-of-service
+  contact:
+    name: API Support
+    url: https://support.accessibe.com/hc/en-us
+    email: support@accessibe.com
+servers:
+  - url: /api/v1/partners
+components:
+  parameters:
+    ExpandSettingsParam:
+      name: expand[]
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [settings]
+        description: "Expands extra fields in the response. If present, includes `maxImagesReached`, `maxImagesLimit`, and the `settings` object (which related to customization settings). `maxImagesReached` indicates the maximum allowed images is exceeded."
+  securitySchemes:
+    X-API-Key:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key generated for the account
+
+  schemas:
+    License:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        relatedAccountId:
+          type: string
+        domain:
+          type: string
+        status:
+          enum:
+            - active
+            - grace
+            - expired
+            - trial
+        price:
+          type: number
+        licenseType:
+          type: string
+        plan:
+          $ref: "#/components/schemas/Plan"
+        relatedBillingId:
+          type: string
+          nullable: true
+        statementDate:
+          type: string
+          format: date-time
+        dateTrialExpires:
+          type: string
+          format: date-time
+        datePlanExpires:
+          type: string
+          format: date-time
+          nullable: true
+        datePlanFirstActivated:
+          type: string
+          format: date-time
+          nullable: true
+        lastSubscriptionPaymentId:
+          type: string
+          nullable: true
+        enableGoogleAnalytics:
+          type: boolean
+        enableRemediationReport:
+          type: boolean
+        monthly:
+          type: boolean
+        autoRenew:
+          type: boolean
+        contactName:
+          type: string
+          nullable: true
+        contactEmail:
+          type: string
+          nullable: true
+        contactPhone:
+          type: string
+          nullable: true
+        contactCountry:
+          type: string
+          nullable: true
+        settings:
+          $ref: "#/components/schemas/LicenseSettings"
+          description: Widget settings object
+        maxImagesReached:
+          type: boolean
+          readOnly: true
+          description: Indicates if the maximum allowed images have been reached for this license
+        maxImagesLimit:
+          type: number
+          readOnly: true
+          description: Shows the maximum images limit for this license
+
+    Plan:
+      type: object
+      nullable: true
+      properties:
+        name:
+          type: string
+        planSKU:
+          type: number
+
+    CreateLicense:
+      type: object
+      required:
+        - domain
+        - planSKU
+      properties:
+        domain:
+          type: string
+          example: "example.com"
+          description: "Domain name for which the license is being created"
+        planSKU:
+          type: number
+          enum: [1, 2, 3, 5, 21, 22, 23]
+          example: 1
+          description: "Plan SKU for the license"
+        contactName:
+          type: string
+          example: "John Doe"
+          description: "Full name of the contact for this license"
+        contactEmail:
+          type: string
+          example: "johndoe@accessibe.com"
+          description: "Contact email address for this license"
+        contactPhone:
+          type: string
+          example: "5551234567"
+          description: "Contact phone number for this license"
+        contactCountryCode:
+          type: string
+          example: "US"
+          description: "Contact country code for this license"
+        discountEnabled:
+          description: "Set to true to enable discounts for the account. Set to false to get commissions instead of discounts. The parameter activate below must be set to true"
+          type: boolean
+          default: true
+        monthly:
+          type: boolean
+          description: "For monthly subscription can pass it as true, else it will be yearly"
+          default: false
+        activate:
+          type: boolean
+          description: "Activate the license, need to have in the account allowActivationByApi set to true"
+          default: false
+        longTrial:
+          type: boolean
+          description: "Assign a long trial period for 30 days, need to have in the account allowLongTrialByApi set to true"
+          default: false
+        settings:
+          $ref: "#/components/schemas/CreateSettings"
+          nullable: true
+          description: |
+            Widget settings. All fields inside `settings` are optional.
+            If any field is `null`, that specific field set to the default setting.
+            If `default` is `true` within this object, **all** fields revert to default regardless of other values.
+
+    UpdateLicense:
+      type: object
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          description: "domain of an exiting license"
+          example: example.com
+        newDomain:
+          type: string
+          description: "New domain for the license, you can update only if you have the allowTransferByApi set to true"
+          example: test.com
+        planSKU:
+          type: number
+          enum: [1, 2, 3, 5, 21, 22, 23]
+          example: 1
+          description: "Plan SKU for the license."
+        contactName:
+          type: string
+          description: "New full name of contact for the license"
+          example: John Doe
+        contactEmail:
+          type: string
+          description: "New contact email for the license"
+          example: johndoe@accessibe.com
+        contactPhone:
+          type: string
+          description: "New contact phone for the license"
+          example: 5551234567
+        contactCountryCode:
+          type: string
+          description: "New contact country code for the license"
+          example: US
+        discountEnabled:
+          description: "Set to true to enable discounts for the account. Set to false to get commissions instead of discounts. The parameter activate below must be set to true."
+          type: boolean
+          default: true
+        monthly:
+          type: boolean
+          description: "For monthly subscription can pass it as true, else it will be yearly"
+          default: false
+        activate:
+          type: boolean
+          description: "Activate the license, need to have in the account allowActivationByApi set to true"
+          default: false
+        disable:
+          type: boolean
+          description: "Disable the license, need to have in the account allowDisableByApi set to true"
+          default: false
+        settings:
+          $ref: "#/components/schemas/UpdateSettings"
+          nullable: true
+          description: |
+            Widget settings. All fields inside `settings` are optional.
+            If any field is `null`, that specific field set to the default setting.
+            If `default` is `true` within this object, all fields revert to default regardless of other values.
+
+    GetBatchStatus:
+      type: object
+      properties:
+        batchId:
+          type: string
+        hasErrors:
+          type: boolean
+        operation:
+          type: string
+          enum:
+            - create
+            - update
+        status:
+          type: string
+          enum:
+            - processing
+            - completed
+        successLicenses:
+          type: array
+          items:
+            type: object
+            properties:
+              domain:
+                type: string
+              getLicenseURL:
+                type: string
+              licenseId:
+                type: string
+        failedLicenses:
+          type: array
+          items:
+            type: object
+            properties:
+              domain:
+                type: string
+              message:
+                type: string
+        total:
+          type: integer
+          description: The total number given in the request
+        totalFailures:
+          type: integer
+        totalSuccesses:
+          type: integer
+    LicenseCreateOrUpdateResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        relatedAccountId:
+          type: string
+        domain:
+          type: string
+        status:
+          enum:
+            - active
+            - grace
+            - expired
+            - trial
+        price:
+          type: number
+        licenseType:
+          type: string
+        plan:
+          $ref: "#/components/schemas/Plan"
+        relatedBillingId:
+          type: string
+          nullable: true
+        statementDate:
+          type: string
+          format: date-time
+        dateTrialExpires:
+          type: string
+          format: date-time
+        datePlanExpires:
+          type: string
+          format: date-time
+          nullable: true
+        datePlanFirstActivated:
+          type: string
+          format: date-time
+          nullable: true
+        lastSubscriptionPaymentId:
+          type: string
+          nullable: true
+        enableGoogleAnalytics:
+          type: boolean
+        enableRemediationReport:
+          type: boolean
+        monthly:
+          type: boolean
+        autoRenew:
+          type: boolean
+        contactName:
+          type: string
+          nullable: true
+        contactEmail:
+          type: string
+          nullable: true
+        contactPhone:
+          type: string
+          nullable: true
+        contactCountry:
+          type: string
+          nullable: true
+
+    LicenseSettings:
+      type: object
+      properties:
+        leadColor:
+          type: string
+          pattern: "^#([a-f0-9A-F]{6})$"
+          nullable: true
+        language:
+          type: string
+          enum: [
+            "en",
+            "es",
+            "fr",
+            "de",
+            "pl",
+            "it",
+            "pt",
+            "nl",
+            "hu",
+            "no",
+            "sl",
+            "sk",
+            "sv",
+            "cs",
+            "tr",
+            "ja",
+            "tw",
+            "zh",
+            "he",
+            "ru",
+            "ar",
+            "fi",
+            "uk",
+            "ro",
+            "ga",
+            "el",
+            "sr",
+            "bs",
+            "hr",
+            "lb",
+            "sq",
+            "da"
+          ]
+          minLength: 2
+          maxLength: 2
+          nullable: true
+        position:
+          type: string
+          enum: [ "left", "right" ]
+          nullable: true
+        triggerColor:
+          type: string
+          pattern: "^#([a-f0-9A-F]{6})$"
+          nullable: true
+        triggerPositionX:
+          type: string
+          enum: [ "left", "right" ]
+          nullable: true
+        triggerPositionY:
+          type: string
+          enum: [ "top", "center", "bottom" ]
+          nullable: true
+        triggerSize:
+          type: string
+          enum: [ "small", "medium", "big" ]
+          nullable: true
+        triggerRadius:
+          type: string
+          enum: [ "50%","0", "10px", "5px" ]
+          nullable: true
+        hideTrigger:
+          type: boolean
+          nullable: true
+        triggerOffsetX:
+          type: number
+          nullable: true
+        triggerOffsetY:
+          type: number
+          nullable: true
+        triggerIcon:
+          type: string
+          enum: [ "checkmark", "display", "display2", "display3", "help", "people", "people2", "settings", "settings2", "wheels", "wheels2" ]
+          nullable: true
+        hideMobile:
+          type: boolean
+          nullable: true
+        mobile:
+          type: object
+          nullable: true
+          properties:
+            triggerPositionX:
+              type: string
+              enum: [ "left", "right" ]
+              nullable: true
+            triggerPositionY:
+              type: string
+              enum: [ "top", "center", "bottom" ]
+              nullable: true
+            triggerSize:
+              type: string
+              enum: [ "small", "medium", "big" ]
+              nullable: true
+            triggerRadius:
+              type: string
+              enum: [ "50%","0", "10px", "5px" ]
+              nullable: true
+            triggerOffsetX:
+              type: number
+              nullable: true
+            triggerOffsetY:
+              type: number
+              nullable: true
+        statementLink:
+          type: string
+          nullable: true
+          format: url
+        footerHtml:
+          type: string
+          nullable: true
+    CreateSettings:
+      type: object
+      properties:
+        leadColor:
+          type: string
+          pattern: "^#([a-f0-9A-F]{6})$"
+          description: "Primary color of the widget in hex format."
+        language:
+          type: string
+          enum: [
+            "en",
+            "es",
+            "fr",
+            "de",
+            "pl",
+            "it",
+            "pt",
+            "nl",
+            "hu",
+            "no",
+            "sl",
+            "sk",
+            "sv",
+            "cs",
+            "tr",
+            "ja",
+            "tw",
+            "zh",
+            "he",
+            "ru",
+            "ar",
+            "fi",
+            "uk",
+            "ro",
+            "ga",
+            "el",
+            "sr",
+            "bs",
+            "hr",
+            "lb",
+            "sq",
+            "da"
+          ]
+          minLength: 2
+          maxLength: 2
+          description: "Language code (ISO 639-1 format)."
+        position:
+          type: string
+          enum: [ "left", "right" ]
+        triggerColor:
+          type: string
+          pattern: "^#([a-f0-9A-F]{6})$"
+        triggerPositionX:
+          type: string
+          enum: [ "left", "right" ]
+        triggerPositionY:
+          type: string
+          enum: [ "top", "center", "bottom" ]
+        triggerSize:
+          type: string
+          enum: [ "small", "medium", "big" ]
+        triggerRadius:
+          type: string
+          enum: [ "50%","0", "10px", "5px" ]
+        hideTrigger:
+          type: boolean
+        triggerOffsetX:
+          type: number
+        triggerOffsetY:
+          type: number
+        triggerIcon:
+          type: string
+          enum: [ "checkmark", "display", "display2", "display3", "help", "people", "people2", "settings", "settings2", "wheels", "wheels2" ]
+        hideMobile:
+          type: boolean
+        mobile:
+          type: object
+          properties:
+            triggerPositionX:
+              type: string
+              enum: [ "left", "right" ]
+            triggerPositionY:
+              type: string
+              enum: [ "top", "center", "bottom" ]
+            triggerSize:
+              type: string
+              enum: [ "small", "medium", "big" ]
+            triggerRadius:
+              type: string
+              enum: [ "50%","0", "10px", "5px" ]
+            triggerOffsetX:
+              type: number
+            triggerOffsetY:
+              type: number
+        statementLink:
+          type: string
+        footerHtml:
+          type: string
+    UpdateSettings:
+      type: object
+      properties:
+        default:
+          type: boolean
+          nullable: true
+          description: "If true, all customization settings revert to their system defaults, regardless of other fields."
+        leadColor:
+          type: string
+          pattern: "^#([a-f0-9A-F]{6})$"
+          nullable: true
+        language:
+          type: string
+          enum: [
+            "en",
+            "es",
+            "fr",
+            "de",
+            "pl",
+            "it",
+            "pt",
+            "nl",
+            "hu",
+            "no",
+            "sl",
+            "sk",
+            "sv",
+            "cs",
+            "tr",
+            "ja",
+            "tw",
+            "zh",
+            "he",
+            "ru",
+            "ar",
+            "fi",
+            "uk",
+            "ro",
+            "ga",
+            "el",
+            "sr",
+            "bs",
+            "hr",
+            "lb",
+            "sq",
+            "da"
+          ]
+          minLength: 2
+          maxLength: 2
+          nullable: true
+        position:
+          type: string
+          enum: [ "left", "right" ]
+          nullable: true
+        triggerColor:
+          type: string
+          pattern: "^#([a-f0-9A-F]{6})$"
+          nullable: true
+        triggerPositionX:
+          type: string
+          enum: [ "left", "right" ]
+          nullable: true
+        triggerPositionY:
+          type: string
+          enum: [ "top", "center", "bottom" ]
+          nullable: true
+        triggerSize:
+          type: string
+          enum: [ "small", "medium", "big" ]
+          nullable: true
+        triggerRadius:
+          type: string
+          enum: [ "50%","0", "10px", "5px" ]
+          nullable: true
+        hideTrigger:
+          type: boolean
+          nullable: true
+        triggerOffsetX:
+          type: number
+          nullable: true
+        triggerOffsetY:
+          type: number
+          nullable: true
+        triggerIcon:
+          type: string
+          enum: [ "checkmark", "display", "display2", "display3", "help", "people", "people2", "settings", "settings2", "wheels", "wheels2" ]
+          nullable: true
+        hideMobile:
+          type: boolean
+          nullable: true
+        mobile:
+          type: object
+          nullable: true
+          properties:
+            triggerPositionX:
+              type: string
+              enum: [ "left", "right" ]
+              nullable: true
+            triggerPositionY:
+              type: string
+              enum: [ "top", "center", "bottom" ]
+              nullable: true
+            triggerSize:
+              type: string
+              enum: [ "small", "medium", "big" ]
+              nullable: true
+            triggerRadius:
+              type: string
+              enum: [ "50%","0", "10px", "5px" ]
+              nullable: true
+            triggerOffsetX:
+              type: number
+              nullable: true
+            triggerOffsetY:
+              type: number
+              nullable: true
+        statementLink:
+          type: string
+          nullable: true
+          format: url
+        footerHtml:
+          type: string
+          nullable: true
+  responses:
+    NotFound:
+      description: License not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message:
+                type: string
+    BadRequestError:
+      description: The request is invalid. Any field could potentially be the cause.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: planSKU can only be 1, 2, 3, 5, 21, 22, 23
+    UnauthorizedError:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: Missing x-api-key in headers
+    ForbiddenError:
+      description: Account does not have access to do this operation
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                enum:
+                  - Could not find a partner account with the provided API key
+                  - Account does not have access to partners API
+    ConflictError:
+      description: Domain already being used
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                enum:
+                  - Domain already being used
+                  - Domain already exists in account
+  examples:
+    SingleLicenseExample:
+      value:
+        success: true
+        data:
+          - id: 6655ffdaaf3c1a7b866ad60b
+            date: 2023-12-01T00:00:00Z
+            relatedAccountId: 6655ffde924acc9586252c9e
+            domain: example.com
+            status: active
+            price: 100
+            licenseType: offline
+            plan:
+              name: Standard
+              planSKU: 1
+            relatedBillingId: 6655ffc7ff28ed0683f30ca3
+            statementDate: 2023-12-01T00:00:00Z
+            dateTrialExpires: 2024-01-01T00:00:00Z
+            datePlanExpires: 2024-12-01T00:00:00Z
+            datePlanFirstActivated: 2023-12-01T00:00:00Z
+            lastSubscriptionPaymentId: 6655ffce1a84015a561e119b
+            enableGoogleAnalytics: true
+            enableRemediationReport: true
+            monthly: false
+            autoRenew: true
+            contactName: John Doe
+            contactEmail: john.doe@example.com
+            contactPhone: 5551234567
+            contactCountry: "United States"
+            settings:
+              leadColor: "#146FF8"
+              language: "en"
+              position: "right"
+              triggerColor: "#146FF8"
+              triggerPositionX: "right"
+              triggerPositionY: "bottom"
+              triggerSize: "medium"
+              triggerRadius: "50%"
+              hideTrigger: false
+              triggerOffsetX: 20
+              triggerOffsetY: 20
+              triggerIcon: "people"
+              hideMobile: false
+              mobile:
+                triggerPositionX: "right"
+                triggerPositionY: "bottom"
+                triggerSize: "small"
+                triggerRadius: "50%"
+                triggerOffsetX: 10
+                triggerOffsetY: 10
+              statementLink: ""
+              footerHtml: ""
+            maxImagesReached: false
+            maxImagesLimit: 5000
+    ManyLicensesExample:
+      value:
+        success: true
+        data:
+          total: 1
+          nextToken: 6140cdf15d3df50b78eeadd5
+          licenses:
+            - id: 6655ffdaaf3c1a7b866ad60b
+              date: 2023-12-01T00:00:00Z
+              relatedAccountId: 6655ffde924acc9586252c9e
+              domain: example.com
+              status: active
+              price: 100
+              licenseType: offline
+              plan:
+                name: Standard
+                planSKU: 1
+              relatedBillingId: 6655ffc7ff28ed0683f30ca3
+              statementDate: 2023-12-01T00:00:00Z
+              dateTrialExpires: 2024-01-01T00:00:00Z
+              datePlanExpires: 2024-12-01T00:00:00Z
+              datePlanFirstActivated: 2023-12-01T00:00:00Z
+              lastSubscriptionPaymentId: 6655ffce1a84015a561e119b
+              enableGoogleAnalytics: true
+              enableRemediationReport: true
+              monthly: false
+              autoRenew: true
+              contactName: John Doe
+              contactEmail: john.doe@example.com
+              contactPhone: 5551234567
+              contactCountry: "United States"
+              settings:
+                leadColor: "#146FF8"
+                language: "en"
+                position: "right"
+                triggerColor: "#146FF8"
+                triggerPositionX: "right"
+                triggerPositionY: "bottom"
+                triggerSize: "medium"
+                triggerRadius: "50%"
+                hideTrigger: false
+                triggerOffsetX: 20
+                triggerOffsetY: 20
+                triggerIcon: "people"
+                hideMobile: false
+                mobile:
+                  triggerPositionX: "right"
+                  triggerPositionY: "bottom"
+                  triggerSize: "small"
+                  triggerRadius: "50%"
+                  triggerOffsetX: 10
+                  triggerOffsetY: 10
+                statementLink: ""
+                footerHtml: ""
+              maxImagesReached: false
+              maxImagesLimit: 5000
+    LicenseRequestExample:
+      value:
+        domain: example.com
+        planSKU: 1
+        contactName: John Doe
+        contactEmail: john.doe@accessibe.com
+        contactPhone: "5551234567"
+        contactCountryCode: "US"
+        settings:
+          default: false
+          leadColor: "#146FF8"
+    LicenseUpdateRequestExample:
+      value:
+        domain: example.com
+        planSKU: 1
+        contactName: John Doe
+        contactEmail: john.doe@accessibe.com
+        contactPhone: "5551234567"
+        contactCountryCode: "US"
+        settings:
+          default: false
+          leadColor: "#146FF8"
+          language: "en"
+          position: "right"
+          triggerColor: "#146FF8"
+          triggerPositionX: "right"
+          triggerPositionY: "bottom"
+          triggerSize: "medium"
+          triggerRadius: "50%"
+          hideTrigger: false
+          triggerOffsetX: 20
+          triggerOffsetY: 20
+          triggerIcon: "people"
+          hideMobile: false
+          mobile:
+            triggerPositionX: "right"
+            triggerPositionY: "bottom"
+            triggerSize: "small"
+            triggerRadius: "50%"
+            triggerOffsetX: 10
+            triggerOffsetY: 10
+          statementLink: ""
+          footerHtml: ""
+    LicenseCreateOrUpdateResponseExample:
+      value:
+        success: true
+        data:
+          id: "6655ffdaaf3c1a7b866ad60b"
+          date: "2023-12-01T00:00:00Z"
+          relatedAccountId: "6655ffde924acc9586252c9e"
+          domain: "example.com"
+          status: "active"
+          price: 100
+          licenseType: "offline"
+          plan:
+            name: "Standard"
+            planSKU: 1
+          relatedBillingId: "6655ffc7ff28ed0683f30ca3"
+          statementDate: "2023-12-01T00:00:00Z"
+          dateTrialExpires: "2024-01-01T00:00:00Z"
+          datePlanExpires: "2024-12-01T00:00:00Z"
+          datePlanFirstActivated: "2023-12-01T00:00:00Z"
+          lastSubscriptionPaymentId: "6655ffce1a84015a561e119b"
+          enableGoogleAnalytics: true
+          enableRemediationReport: true
+          monthly: false
+          autoRenew: true
+          contactName: "John Doe"
+          contactEmail: "john.doe@example.com"
+          contactPhone: "5551234567"
+          contactCountry: "United States"
+    BatchLicenseCreateRequestExample:
+      value:
+        licenses:
+          - domain: example1.com
+            planSKU: 1
+            contactName: John Doe
+            contactEmail: john.doe@example1.com
+            contactPhone: "5551234567"
+            contactCountryCode: "US"
+          - domain: example2.com
+            planSKU: 2
+            contactName: Jane Doe
+            contactEmail: jane.doe@example2.com
+            contactPhone: "5557654321"
+            contactCountryCode: "US"
+    BatchLicenseCreateResponseExample:
+      value:
+        success: true
+        data:
+          batchId: 6655ffdaaf3c1a7b866ad60b
+          status: processing
+          operation: create
+          getBatchStatusURL: https://dashboard.accessibe.com/api/v1/partners/accounts/6655ffde924acc9586252c9e/access-widget-licenses/batch/6655ffdaaf3c1a7b866ad60b
+    BatchLicenseUpdateRequestExample:
+      value:
+        licenses:
+          - domain: example1.com
+            newDomain: test1.com
+            planSKU: 1
+            contactName: John Doe
+            contactEmail: johndoe@accessibe.com
+            contactPhone: "5551234567"
+            contactCountryCode: "US"
+            discountEnabled: true
+            monthly: false
+            activate: true
+            settings:
+              default: false
+              position: "right"
+          - domain: example2.com
+            newDomain: test2.com
+            planSKU: 2
+            contactName: Jane Doe
+            contactEmail: janedoe@accessibe.com
+            contactPhone: "5557654321"
+            contactCountryCode: "US"
+    BatchLicenseUpdateResponseExample:
+      value:
+        success: true
+        data:
+          batchId: 6655ffdaaf3c1a7b866ad60b
+          status: processing
+          operation: update
+          getBatchStatusURL: https://dashboard.accessibe.com/api/v1/partners/accounts/6655ffde924acc9586252c9e/access-widget-licenses/batch/6655ffdaaf3c1a7b866ad60b
+    GetBatchStatusCompletedExample:
+      value:
+        success: true
+        data:
+          batchId: 6655ffdaaf3c1a7b866ad60b
+          hasErrors: false
+          operation: create
+          status: completed
+          successLicenses:
+            [
+              {
+                domain: example1.com,
+                getLicenseURL: https://dashboard.accessibe.com/api/v1/partners/accounts/6655ffde924acc9586252c9e/access-widget-licenses/6655ffdaaf3c1a7b866ad60b,
+                licenseId: 6655ffdaaf3c1a7b866ad60b,
+              },
+              {
+                domain: example2.com,
+                getLicenseURL: https://dashboard.accessibe.com/api/v1/partners/accounts/6655ffde924acc9586252c9e/access-widget-licenses/6655ffdaaf3c1a7b866ad60c,
+                licenseId: 6655ffdaaf3c1a7b866ad60c,
+              },
+            ]
+          failedLicenses: []
+          total: 2
+          totalFailures: 0
+          totalSuccesses: 2
+    GetBatchStatusProcessingExample:
+      value:
+        success: true
+        data:
+          batchId: 6655ffdaaf3c1a7b866ad60b
+          hasErrors: false
+          operation: update
+          status: processing
+          successLicenses: []
+          failedLicenses: []
+          total: 2
+          totalFailures: 0
+          totalSuccesses: 0
+
+paths:
+  /accounts/{accountId}/access-widget-licenses/{licenseId}:
+    get:
+      summary: Get an accessWidget license
+      description: |
+        Gets the details of the specified accessWidget license for the specified account ID.
+        Use GET /accounts/{accountId}/access-widget-licenses and filter by domain to get the licenseId for a specific domain.
+
+        This endpoint requires the `x-api-key` header for authentication. The key must match the API key associated with the specified account. The account must also be a partner account.
+      security:
+        - X-API-Key: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the account. You can check your ID [here](https://dashboard.accessibe.com/app/account).
+          example: 6655ffde924acc9586252c9e
+        - name: licenseId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the license.
+          example: 6655ffdaaf3c1a7b866ad60b
+        - $ref: "#/components/parameters/ExpandSettingsParam"
+      responses:
+        "200":
+          description: License found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    $ref: "#/components/schemas/License"
+              examples:
+                LicenseExample:
+                  $ref: "#/components/examples/SingleLicenseExample"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "404":
+          description: License not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/NotFound"
+              examples:
+                notFoundExample:
+                  value:
+                    success: false
+                    message: License not found
+
+    patch:
+      summary: Update an accessWidget license
+      description: |
+        Updates the details of the specified accessWidget license for the specified account. Any parameters not provided will be left unchanged. 
+        Use GET /accounts/{accountId}/access-widget-licenses and filter by domain to get the licenseId for a specific domain.
+
+        planSKU is the type of plan for the license where: 
+        
+        1 = Standard, 2 = Advanced Plus, 3 = Enterprise, 5 = Advanced,
+        21 = Micro, 22 = Growth, 23 = Scale
+
+        Note: If you pass null for a specific field in `settings` (for example `leadColor: null`), that field set to the default value.
+      security:
+        - X-API-Key: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the account. You can check your ID [here](https://dashboard.accessibe.com/app/account)
+          example: 6655ffde924acc9586252c9e
+        - name: licenseId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the license.
+          example: 6655ffdaaf3c1a7b866ad60b
+      requestBody:
+        description: The license object to update.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateLicense"
+            examples:
+              LicenseUpdateRequestExample:
+                $ref: "#/components/examples/LicenseUpdateRequestExample"
+      responses:
+        "200":
+          description: License updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    $ref: "#/components/schemas/LicenseCreateOrUpdateResponse"
+              examples:
+                LicenseCreateOrUpdateResponseExample:
+                  $ref: "#/components/examples/LicenseCreateOrUpdateResponseExample"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/ConflictError"
+
+  /accounts/{accountId}/access-widget-licenses:
+    get:
+      summary: Get accessWidget licenses
+      description: |
+        Gets all the accessWidget licenses for the specified account.
+
+        This endpoint requires the `x-api-key` header for authentication. The key must match the API key associated with the specified account. The account must also be a partner account.
+      security:
+        - X-API-Key: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the account. You can check your ID [here](https://dashboard.accessibe.com/app/account).
+          example: 6655ffde924acc9586252c9e
+        - $ref: "#/components/parameters/ExpandSettingsParam"
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Token used in pagination to retrieve the next set of results. Make the call again using the returned token to retrieve the next results.
+          example: 63fe209a096fed10ca0c08a2
+          default: null
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            format: int32
+            description: The number of results to return.
+            example: 3
+            default: 10
+            maximum: 150
+        - name: status
+          in: query
+          schema:
+            enum:
+              - active
+              - trial
+              - expired
+              - grace
+          description: Filter the results by license status.
+          example: active
+        - name: domain
+          in: query
+          schema:
+            type: string
+          description: Filter the results by domain.
+          example: example.com
+
+      responses:
+        "200":
+          description: The list of licenses found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                        description: The total number of licenses without any filters.
+                      licenses:
+                        type: array
+                        maximum: 150
+                        minimum: 1
+                        items:
+                          $ref: "#/components/schemas/License"
+                      nextToken:
+                        type: string
+                        nullable: true
+              examples:
+                LicenseExample:
+                  $ref: "#/components/examples/ManyLicensesExample"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "404":
+          description: No licenses were found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/NotFound"
+              examples:
+                notFoundExample:
+                  value:
+                    success: false
+                    message: Licenses not found
+
+    post:
+      summary: Create an accessWidget license
+      description: |
+        Creates a new accessWidget license for the specified account.
+
+        This endpoint requires the `x-api-key` header for authentication. The key must match the API key associated with the specified account. The account must also be a partner account.
+
+        planSKU is the type of plan for the license where: 
+        
+        1 = Standard, 2 = Advanced Plus, 3 = Enterprise, 5 = Advanced,
+        21 = Micro, 22 = Growth, 23 = Scale
+      security:
+        - X-API-Key: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the account. You can check your ID [here](https://dashboard.accessibe.com/app/account).
+          example: 6655ffde924acc9586252c9e
+      requestBody:
+        description: License object to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateLicense"
+            examples:
+              LicenseRequestExample:
+                $ref: "#/components/examples/LicenseRequestExample"
+      responses:
+        "201":
+          description: License created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    $ref: "#/components/schemas/LicenseCreateOrUpdateResponse"
+              examples:
+                LicenseCreateOrUpdateResponseExample:
+                  $ref: "#/components/examples/LicenseCreateOrUpdateResponseExample"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "404":
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/NotFound"
+              examples:
+                notFoundExample:
+                  value:
+                    success: false
+                    message: Account not found
+                    data: []
+        "409":
+          $ref: "#/components/responses/ConflictError"
+
+  /accounts/{accountId}/access-widget-licenses/batch-create:
+    post:
+      summary: Create multiple accessWidget licenses
+      description: |
+        Creates multiple accessWidget licenses for the specified account. The maximum number of licenses that can be created in a single request is 150.
+
+        This endpoint requires the `x-api-key` header for authentication. The key must match the API key associated with the specified account. The account must also be a partner account.
+
+        planSKU is the type of plan for the license where:
+        
+        1 = Standard, 2 = Advanced Plus, 3 = Enterprise, 5 = Advanced,
+        21 = Micro, 22 = Growth, 23 = Scale
+      security:
+        - X-API-Key: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the account. You can check your ID [here](https://dashboard.accessibe.com/app/account).
+          example: 6655ffde924acc9586252c9e
+        - name: Idempotency-Key
+          in: header
+          schema:
+            type: string
+          description: A unique key to ensure the request is processed only once.
+          example: 53fe209b096f2d10ba0c08a4
+      requestBody:
+        description: License objects to be created.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                licenses:
+                  type: array
+                  maximum: 150
+                  minimum: 1
+                  items:
+                    $ref: "#/components/schemas/CreateLicense"
+            examples:
+              BatchLicenseCreateRequestExample:
+                $ref: "#/components/examples/BatchLicenseCreateRequestExample"
+      responses:
+        "202":
+          description: Licenses are being created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      batchId:
+                        type: string
+                      status:
+                        type: string
+                        enum:
+                          - processing
+                          - completed
+                      operation:
+                        type: string
+                        enum:
+                          - create
+                          - update
+                      getBatchStatusURL:
+                        type: string
+              examples:
+                BatchLicenseCreateResponseExample:
+                  $ref: "#/components/examples/BatchLicenseCreateResponseExample"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "404":
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/NotFound"
+              examples:
+                notFoundExample:
+                  value:
+                    success: false
+                    message: Account not found
+                    data: []
+
+  /accounts/{accountId}/access-widget-licenses/batch-update:
+    post:
+      summary: Update multiple accessWidget licenses
+      description: |
+        Updates multiple existing accessWidget licenses for the specified account. The maximum number of licenses that can be updated in a single request is 150.
+
+        This endpoint requires the `x-api-key` header for authentication. The key must match the API key associated with the specified account. The account must also be a partner account.
+      security:
+        - X-API-Key: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the account. You can check your ID [here](https://dashboard.accessibe.com/app/account).
+          example: 6655ffde924acc9586252c9e
+        - name: Idempotency-Key
+          in: header
+          schema:
+            type: string
+          description: A unique key to ensure the request is processed only once.
+          example: 53fe209b096f2d10ba0c08a4
+      requestBody:
+        description: License objects to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                licenses:
+                  type: array
+                  maximum: 150
+                  minimum: 1
+                  items:
+                    $ref: "#/components/schemas/UpdateLicense"
+            examples:
+              BatchLicenseUpdateRequestExample:
+                $ref: "#/components/examples/BatchLicenseUpdateRequestExample"
+      responses:
+        "202":
+          description: Licenses are being updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      batchId:
+                        type: string
+                      status:
+                        type: string
+                        enum:
+                          - processing
+                          - completed
+                      operation:
+                        type: string
+                        enum:
+                          - create
+                          - update
+                      getBatchStatusURL:
+                        type: string
+              examples:
+                BatchLicenseCreateResponseExample:
+                  $ref: "#/components/examples/BatchLicenseUpdateResponseExample"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "404":
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/NotFound"
+              examples:
+                notFoundExample:
+                  value:
+                    success: false
+                    message: Account not found
+                    data: []
+
+  /accounts/{accountId}/access-widget-licenses/batch/{batchId}:
+    get:
+      summary: Get batch operation status
+      description: |
+        Gets the status of a batch operation for creating or updating accessWidget licenses. Use the batchId from the response of either POST /accounts/{accountId}/access-widget-licenses/batch-create or POST /accounts/{accountId}/access-widget-licenses/batch-update.
+
+        This endpoint requires the `x-api-key` header for authentication. The key must match the API key associated with the specified account. The account must also be a partner account.
+      security:
+        - X-API-Key: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the account. You can check your ID [here](https://dashboard.accessibe.com/app/account).
+          example: 6655ffde924acc9586252c9e
+        - name: batchId
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The ID of the batch operation.
+          example: 6655ffdaaf3c1a7b866ad60b
+      responses:
+        "200":
+          description: Batch operation found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: "#/components/schemas/GetBatchStatus"
+              examples:
+                GetBatchStatusCompletedExample:
+                  $ref: "#/components/examples/GetBatchStatusCompletedExample"
+        "202":
+          description: Batch operation is being processed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: "#/components/schemas/GetBatchStatus"
+              examples:
+                GetBatchStatusCompletedExample:
+                  $ref: "#/components/examples/GetBatchStatusProcessingExample"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "404":
+          description: Batch operation not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/NotFound"
+              examples:
+                notFoundExample:
+                  value:
+                    success: false
+                    message: Batch operation not found

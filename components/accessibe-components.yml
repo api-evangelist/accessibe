@@ -1,0 +1,36 @@
+generated: '2026-07-31'
+method: searched
+source: https://accessibe.com/llms.txt + https://accessibe.com/accessibility-interface
+note: accessiBe's principal client-side product is an embeddable script, not an SDK.
+  It is captured here because it is the surface most integrators actually deploy.
+families:
+- name: accessWidget
+  kind: embedded-script
+  description: An AI-powered accessibility layer injected into a page by an embed
+    script. It applies screen-reader and keyboard-navigation remediations and renders
+    an end-user accessibility interface offering profiles and per-user adjustments to
+    content, colouring and display.
+  install_docs: https://accessibe.com/support/installation/how-to-install-accessibes-embed-code
+  interface_docs: https://accessibe.com/accessibility-interface
+  product_page: https://accessibe.com/accesswidget
+  configuration: Widget appearance and behaviour are configured per license and are
+    readable and writable through the Partners API LicenseSettings object (leadColor,
+    language, position, triggerColor, triggerPositionX, triggerPositionY, triggerSize,
+    triggerRadius, hideTrigger, triggerOffsetX, triggerOffsetY, triggerIcon,
+    hideMobile, mobile, statementLink, footerHtml).
+  configuration_artifact: data-model/accessibe-data-model.yml
+  end_user_profiles_documented_at: https://accessibe.com/accessibility-interface
+- name: Platform apps and no-code installers
+  kind: platform-integration
+  description: No-code installation packages for content management systems and site
+    builders.
+  docs: https://accessibe.com/integrations
+  platforms: [WordPress, Shopify, BigCommerce, Wix, Webflow, Squarespace, Joomla]
+  note: The Joomla! app shipped 2025-12-23 (see changelog/accessibe-changelog.yml);
+    a VTEX IO app is published in the VTEX app store.
+- name: accessScan
+  kind: hosted-tool
+  description: A free hosted single-URL accessibility and ADA compliance checker that
+    returns a downloadable report.
+  url: https://accessibe.com/accessscan
+  api: none published

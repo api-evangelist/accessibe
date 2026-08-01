@@ -1,0 +1,56 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the accessiBe Partners API License
+  version: 1.0.0
+extends: openapi/accessibe-partners-openapi-original.yml
+x-generated: '2026-07-31'
+x-method: generated
+x-source: openapi/accessibe-partners-openapi-original.yml
+x-note: The harvested specification declares no servers with an absolute URL, no tags,
+  and no operationIds. This overlay adds them without mutating the original document.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-harvested: '2026-07-31'
+    x-apievangelist-source: https://dashboard.accessibe.com/api/v1/partners/open-api/partners.yaml
+    x-apievangelist-docs: https://dashboard.accessibe.com/api/v1/partners/docs
+- target: $
+  update:
+    servers:
+    - url: https://dashboard.accessibe.com/api/v1/partners
+      description: Production
+    tags:
+    - name: Licenses
+      description: Create, read and update accessWidget licenses for a partner account.
+    - name: Batch
+      description: Asynchronous bulk create and update of up to 150 licenses per request.
+- target: $.paths['/accounts/{accountId}/access-widget-licenses'].get
+  update:
+    operationId: listAccessWidgetLicenses
+    tags: [Licenses]
+- target: $.paths['/accounts/{accountId}/access-widget-licenses'].post
+  update:
+    operationId: createAccessWidgetLicense
+    tags: [Licenses]
+- target: $.paths['/accounts/{accountId}/access-widget-licenses/{licenseId}'].get
+  update:
+    operationId: getAccessWidgetLicense
+    tags: [Licenses]
+- target: $.paths['/accounts/{accountId}/access-widget-licenses/{licenseId}'].patch
+  update:
+    operationId: updateAccessWidgetLicense
+    tags: [Licenses]
+- target: $.paths['/accounts/{accountId}/access-widget-licenses/batch-create'].post
+  update:
+    operationId: batchCreateAccessWidgetLicenses
+    tags: [Batch]
+    x-idempotency-header: Idempotency-Key
+- target: $.paths['/accounts/{accountId}/access-widget-licenses/batch-update'].post
+  update:
+    operationId: batchUpdateAccessWidgetLicenses
+    tags: [Batch]
+    x-idempotency-header: Idempotency-Key
+- target: $.paths['/accounts/{accountId}/access-widget-licenses/batch/{batchId}'].get
+  update:
+    operationId: getAccessWidgetLicenseBatchStatus
+    tags: [Batch]

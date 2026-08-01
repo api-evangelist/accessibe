@@ -1,0 +1,16 @@
+generated: '2026-07-31'
+method: derived
+source: openapi/accessibe-partners-openapi-original.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: X-API-Key
+  type: apiKey
+  in: header
+  parameter: X-API-Key
+  description: API key generated for the account
+  sources:
+  - openapi/accessibe-partners-openapi-original.yml

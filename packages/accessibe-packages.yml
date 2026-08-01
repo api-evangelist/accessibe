@@ -1,0 +1,51 @@
+generated: '2026-07-31'
+method: searched
+source: https://registry.npmjs.org/accessflow-mcp-server
+registries_probed:
+- npm
+- PyPI
+- Maven Central
+- NuGet
+- pkg.go.dev
+- RubyGems
+- Packagist
+- crates.io
+packages:
+- language: javascript
+  registry: npm
+  name: accessflow-mcp-server
+  version: 2.3.9
+  url: https://www.npmjs.com/package/accessflow-mcp-server
+  install: npx -y accessflow-mcp-server
+  official: true
+  license: ISC
+  author: AccessFlow
+  first_published: '2025-10-08'
+  last_published: '2026-07-28'
+  description: accessFlow MCP Server for accessibility issue remediation — connects
+    AI clients to the accessFlow platform to identify, prioritize and fix accessibility
+    issues.
+  binaries:
+  - accessflow-mcp-server
+  - accessflow-mcp-http
+  keywords: [mcp, accessibility, wcag, remediation, accessflow, mcp-server]
+  evidence: README banner is served from https://accessflow.accessibe.com/media/MCP-banner.png
+    and links to http://accessibe.com/accessflow; the remote server it configures is
+    https://flow-mcp.accessibe.com/mcp.
+  artifact: mcp/accessibe-mcp.yml
+notes:
+- accessiBe documents an accessFlow SDK for Playwright, Cypress and Selenium that is
+  installed from npm and used to run accessibility audits in CI/CD, but the package
+  name is not published on any public accessiBe page found at harvest time and no
+  matching first-party package was located on the npm registry. It is recorded here
+  as documented-but-unresolved rather than guessed.
+- No first-party accessiBe or accessFlow packages exist on PyPI, RubyGems, Packagist,
+  crates.io, NuGet, Maven Central or pkg.go.dev.
+- The accessWidget browser integration is an embed script, not a package (see
+  components/accessibe-components.yml).
+undocumented_or_unresolved:
+- name: accessFlow SDK
+  registry: npm
+  status: package name not published
+  docs: https://accessibe.com/blog/knowledgebase/accessflows-sdk-and-mcp
+  frameworks: [Playwright, Cypress, Selenium]

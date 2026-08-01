@@ -1,23 +1,162 @@
 aid: accessibe
 name: accessiBe
-description: 'accessiBe is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'accessiBe is a web accessibility technology company whose products help
+  organizations make websites and web applications usable by people with disabilities
+  and compliant with WCAG, the ADA, Section 508, AODA and the European Accessibility
+  Act. Its portfolio spans accessWidget (an AI-driven remediation layer and end-user
+  accessibility interface installed via an embed script), accessScan (a free single-URL
+  compliance checker), accessFlow (a developer-first accessibility testing and monitoring
+  platform with an SDK for Playwright, Cypress and Selenium plus CI/CD integrations),
+  and accessServices (expert audits, user testing by people with disabilities, file
+  and PDF remediation, and VPAT authoring). Developer surfaces include a documented
+  Partners API for programmatic accessWidget license management and a first-party
+  accessFlow MCP server that connects IDE AI assistants to accessibility audit findings
+  and remediation guidance.'
+image: https://accessibe.com/wp-content/uploads/2026/01/favicon.png
 url: https://raw.githubusercontent.com/api-evangelist/accessibe/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
 created: '2026-07-31'
 modified: '2026-07-31'
+x-enrichment:
+  date: '2026-07-31'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v1
 tags:
 - Company
-apis: []
+- Accessibility
+- Web Accessibility
+- WCAG
+- ADA Compliance
+- Compliance
+- Developer Tools
+- Testing
+- Quality Assurance
+- Artificial Intelligence
+apis:
+- aid: accessibe:partners-api
+  name: accessiBe Partners API License
+  description: 'The Partners API allows accessiBe partners to manage accessWidget
+    licenses programmatically across their accounts, with full control over the license
+    lifecycle: create, retrieve, list, filter and update licenses, plus asynchronous
+    batch create and batch update of up to 150 licenses per request with a batch status
+    endpoint. Authentication is a per-account API key supplied in the x-api-key header;
+    the account must be enabled as a partner account. Listing supports cursor pagination
+    (nextToken + limit) and filtering by status and domain, and the batch endpoints
+    accept an Idempotency-Key header so a request is processed only once.'
+  humanURL: https://dashboard.accessibe.com/api/v1/partners/docs
+  baseURL: https://dashboard.accessibe.com/api/v1/partners
+  tags:
+  - Licenses
+  - Accessibility
+  - Partners
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/accessibe-partners-openapi-original.yml
+  - type: Overlay
+    url: overlays/accessibe-partners-overlay.yaml
+  - type: Documentation
+    url: https://dashboard.accessibe.com/api/v1/partners/docs
+  - type: APIReference
+    url: https://dashboard.accessibe.com/api/v1/partners/docs
+- aid: accessibe:accessflow-mcp
+  name: accessFlow MCP Server
+  description: 'The accessFlow Model Context Protocol server connects AI clients such
+    as GitHub Copilot and Cursor directly to accessFlow accessibility data. It exposes
+    three tools — getMostUrgentIssues, getIssueRemediation and resolveIssue — over
+    both a local stdio transport (npx accessflow-mcp-server, configured with API_KEY
+    and DOMAIN) and a hosted remote HTTP transport at https://flow-mcp.accessibe.com/mcp
+    authenticated with a bearer AI MCP token plus an X-Domain header. It works against
+    both accessFlow platform audits and SDK-based audits selected via the auditSource
+    parameter.'
+  humanURL: https://www.npmjs.com/package/accessflow-mcp-server
+  baseURL: https://flow-mcp.accessibe.com/mcp
+  tags:
+  - MCP
+  - Accessibility
+  - Agents
+  - Remediation
+  properties:
+  - type: MCPServer
+    url: mcp/accessibe-mcp.yml
+  - type: Documentation
+    url: https://accessibe.com/blog/knowledgebase/accessflows-sdk-and-mcp
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/accessibe-agentic-access.yml
+- type: TrustCenter
+  url: security/accessibe-trust-center.yml
+- type: DomainSecurity
+  url: security/accessibe-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/accessibe_stock/
+  url: https://accessibe.com
+- type: DeveloperPortal
+  url: https://dashboard.accessibe.com/api/v1/partners/docs
+- type: Documentation
+  url: https://accessibe.com/support
+- type: APIReference
+  url: https://dashboard.accessibe.com/api/v1/partners/docs
+- type: GettingStarted
+  url: https://accessibe.com/accessflow-integrate
+- type: Support
+  url: https://accessibe.com/support
+- type: Blog
+  url: https://accessibe.com/blog
+- type: Pricing
+  url: https://accessibe.com/pricing/accesswidget
+- type: SignUp
+  url: https://dashboard.accessibe.com/app/signup
+- type: Login
+  url: https://dashboard.accessibe.com
+- type: TermsOfService
+  url: https://accessibe.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://accessibe.com/privacy-notice
+- type: StatusPage
+  url: https://status.accessibe.com
+- type: Compliance
+  url: https://accessibe.com/security
+- type: ChangeLog
+  url: https://support.accessibe.com/hc/en-us/categories/15274937179922-Release-Notes
+- type: ChangeLog
+  url: changelog/accessibe-changelog.yml
+- type: LLMsTxt
+  url: llms/accessibe-llms.txt
+- type: Packages
+  url: packages/accessibe-packages.yml
+- type: SDKs
+  url: packages/accessibe-packages.yml
+- type: MCPServer
+  url: mcp/accessibe-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/accessibe-tool-crosswalk.yml
+- type: Authentication
+  url: authentication/accessibe-authentication.yml
+- type: Conventions
+  url: conventions/accessibe-conventions.yml
+- type: Idempotency
+  url: conventions/accessibe-conventions.yml
+- type: ErrorCatalog
+  url: errors/accessibe-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/accessibe-lifecycle.yml
+- type: Conformance
+  url: conformance/accessibe-conformance.yml
+- type: DataModel
+  url: data-model/accessibe-data-model.yml
+- type: Components
+  url: components/accessibe-components.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/accessibe-partners-overlay.yaml

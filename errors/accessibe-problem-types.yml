@@ -1,0 +1,94 @@
+generated: '2026-07-31'
+method: derived
+source: openapi/accessibe-partners-openapi-original.yml
+format: custom-envelope
+note: The Partners API does not use RFC 9457 application/problem+json. Every error
+  is returned as application/json with a flat envelope of `success` (always false on
+  error) and a human-readable `message`; some 404 bodies additionally carry an empty
+  `data` array. There is no machine-readable error code or type URI, so consumers must
+  branch on the HTTP status and, where a status is overloaded, on the message string.
+envelope:
+  fields:
+  - name: success
+    type: boolean
+    description: Always false on an error response.
+  - name: message
+    type: string
+    description: Human-readable error text. Not a stable machine code.
+  - name: data
+    type: array
+    description: Present and empty on some Account not found responses.
+  example:
+    success: false
+    message: Missing x-api-key in headers
+problems:
+- status: 400
+  name: BadRequestError
+  title: The request is invalid. Any field could potentially be the cause.
+  message_examples:
+  - planSKU can only be 1, 2, 3, 5, 21, 22, 23
+  remediation: Validate the request body against the CreateLicense / UpdateLicense
+    schema. planSKU must be one of 1 (Standard), 2 (Advanced Plus), 3 (Enterprise),
+    5 (Advanced), 21 (Micro), 22 (Growth), 23 (Scale).
+  source_operations:
+  - GET /accounts/{accountId}/access-widget-licenses/{licenseId}
+  - PATCH /accounts/{accountId}/access-widget-licenses/{licenseId}
+  - GET /accounts/{accountId}/access-widget-licenses
+  - POST /accounts/{accountId}/access-widget-licenses
+  - POST /accounts/{accountId}/access-widget-licenses/batch-create
+  - POST /accounts/{accountId}/access-widget-licenses/batch-update
+  - GET /accounts/{accountId}/access-widget-licenses/batch/{batchId}
+- status: 401
+  name: UnauthorizedError
+  title: Missing or invalid API key
+  message_examples:
+  - Missing x-api-key in headers
+  remediation: Send the account API key in the x-api-key header. The key is found in
+    the Customer Portal under Account Settings - Subscriptions API/CSV access.
+  source_operations:
+  - all operations
+- status: 403
+  name: ForbiddenError
+  title: Account does not have access to do this operation
+  message_enum:
+  - Could not find a partner account with the provided API key
+  - Account does not have access to partners API
+  remediation: The API key must belong to the accountId in the request path, and the
+    account must be enabled as a partner account. Contact accessiBe support to enable
+    partner API access.
+  source_operations:
+  - all operations
+- status: 404
+  name: NotFound
+  title: Resource not found
+  message_enum:
+  - License not found
+  - Licenses not found
+  - Account not found
+  - Batch operation not found
+  remediation: Verify accountId, licenseId or batchId. Use GET /accounts/{accountId}/access-widget-licenses
+    filtered by domain to resolve a licenseId for a domain.
+  source_operations:
+  - GET /accounts/{accountId}/access-widget-licenses/{licenseId}
+  - PATCH /accounts/{accountId}/access-widget-licenses/{licenseId}
+  - GET /accounts/{accountId}/access-widget-licenses
+  - POST /accounts/{accountId}/access-widget-licenses
+  - POST /accounts/{accountId}/access-widget-licenses/batch-create
+  - POST /accounts/{accountId}/access-widget-licenses/batch-update
+  - GET /accounts/{accountId}/access-widget-licenses/batch/{batchId}
+- status: 409
+  name: ConflictError
+  title: Domain already being used
+  message_enum:
+  - Domain already being used
+  - Domain already exists in account
+  remediation: A domain can carry only one accessWidget license. List licenses filtered
+    by domain and PATCH the existing license instead of creating a new one.
+  source_operations:
+  - PATCH /accounts/{accountId}/access-widget-licenses/{licenseId}
+  - POST /accounts/{accountId}/access-widget-licenses
+gaps:
+- No 429 / rate-limit response is declared in the specification.
+- No 5xx responses are declared in the specification.
+- Batch endpoints declare no 409, so per-row domain conflicts surface inside the batch
+  status payload rather than as an HTTP error.

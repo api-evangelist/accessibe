@@ -1,0 +1,129 @@
+# accessiBe
+
+accessiBe is a technology company providing a comprehensive suite of AI-powered and expert-led web accessibility solutions. Its mission is to make the internet accessible to people with disabilities, enabling businesses of all sizes to achieve and maintain compliance with standards such as the Web Content Accessibility Guidelines (WCAG) and the Americans with Disabilities Act (ADA). The ecosystem includes automated remediation tools, developer platforms, manual expert services, and litigation support to create an inclusive digital experience.
+
+## Products: AI-Powered & Developer Tools
+
+accessWidget: AI-Powered Website Accessibility: https://accessibe.com/accesswidget - An AI-powered, automated solution that provides WCAG 2.1 AA-level remediation for websites. It works by scanning and analyzing a site's structure and elements, then applying fixes for screen reader compatibility and keyboard navigation, typically within 48 hours of installation. The solution includes a customizable accessibility interface that allows end-users to make real-time adjustments to content, coloring, and display options. It also automatically generates an accessibility statement for the website.
+
+accessScan: Free Accessibility Checker: https://accessibe.com/accessscan - A free, instant tool that scans a single website URL to check for accessibility and ADA compliance issues. It provides an actionable, downloadable report, serving as the first step for businesses to understand their compliance status and mitigate legal risk. It is a key tool for lead generation and problem discovery.
+
+accessFlow: Developer-First Accessibility Platform: https://accessibe.com/accessflow - An all-in-one developer platform designed to test, monitor, and improve the accessibility of websites and web applications from the ground up. It integrates directly into the development lifecycle, allowing teams to build accessible code natively and proactively address issues before they are deployed.
+
+Integrations & Platforms: https://accessibe.com/integrations - A central resource detailing seamless integration with popular Content Management Systems (CMS) and website builders. This enables easy, no-code installation of accessiBe's solutions on platforms including WordPress, Shopify, BigCommerce, Wix, Webflow, and Squarespace.
+
+## Services: Expert-Led Accessibility Solutions (accessServices)
+
+accessServices: Expert Accessibility Services: https://accessibe.com/accessservices - A central hub for all manual accessibility services, including expert audits, user testing, file remediation, and VPAT generation. These services are designed to complement automated solutions and address complex accessibility challenges that require human expertise.
+
+Expert Audit: https://accessibe.com/expert-audit - A manual, line-by-line audit of a website conducted by accessibility experts to identify WCAG violations. The service delivers a detailed report with findings and an actionable remediation plan for development teams to implement the necessary fixes.
+
+User Testing by People with Disabilities: https://accessibe.com/user-testing - A service that provides valuable feedback from a team of users with a variety of disabilities, including blindness, low vision, cognitive disabilities, and mobility impairments. Testers assess key user flows using their native assistive technologies and provide detailed reports and video recordings to identify real-world accessibility barriers and improve the overall user experience.
+
+File & PDF Remediation: https://accessibe.com/file-accessibility - A professional remediation service to make digital files, including PDFs, Word documents, Excel workbooks, and PowerPoint presentationsâ€”accessible. The service ensures proper tags, a clear reading order, alternative text for images, and descriptive links, making the content fully usable for people with assistive technology.
+
+VPAT (Voluntary Product Accessibility Template) Services: https://accessibe.com/vpat - A service to create a Voluntary Product Accessibility Template (VPATÂ®), which is a formal document that evaluates how accessible a digital product is according to standards like Section 508 and WCAG. This is a critical compliance document for businesses selling to government entities or large enterprises.
+
+## Litigation Support
+
+Litigation Support Program: https://accessibe.com/litigation-support - A dedicated service for clients who receive an accessibility-related legal claim or demand letter. It includes a dedicated case manager, detailed claims analysis, response drafting assistance, and consultation with an ADA attorney, backed by a financial pledge of up to $15,000 to cover legal fees under specific terms.
+
+Understanding ADA Website Lawsuits: https://accessibe.com/blog/knowledgebase/ada-website-lawsuits - Educational resources, including guides on understanding the landscape of ADA website lawsuits and how to properly respond to demand letters. These materials help businesses proactively understand and manage their legal risk.
+
+Customer Case Studies & Lawsuit Dismissals: https://accessibe.com/case-studies - A collection of real-world examples and testimonials from customers like For Love & Lemons and Centinela, demonstrating how accessiBe's solutions and litigation support have helped them achieve lawsuit dismissals and overcome unfounded legal allegations.
+
+## Solutions by Business Type
+
+For Small Business: https://accessibe.com/small-business - Solutions tailored for entrepreneurs, family-owned businesses, and companies with under 1,000 monthly visitors. The focus is on the streamlined, cost-effective implementation of `accessWidget` to achieve compliance quickly and affordably.
+
+For Mid-Market: https://accessibe.com/mid-market - Customized solutions for businesses experiencing rapid expansion or with more complex websites. This segment typically utilizes the more advanced `accessWidget` plans and may supplement with select `accessServices` like audits or file remediation for a more tailored approach.
+
+For Enterprise: https://accessibe.com/enterprise - Comprehensive, hybrid accessibility solutions for established companies with complex digital ecosystems. This often involves a combination of `accessWidget` for broad coverage, `accessFlow` for in-house development teams, and the full suite of `accessServices` including expert audits, user testing, and dedicated support to ensure robust compliance.
+
+## Partners
+
+Agency Partner Program: https://accessibe.com/partners - A program for digital agencies, developers, and marketing professionals to offer accessiBe's solutions to their clients. Partners can create a new revenue stream and enhance their service offerings with benefits like white-label capabilities, dedicated support, and co-selling opportunities.
+
+Strategic Partnerships: https://accessibe.com/partners/strategic - Customized accessibility solutions for SaaS platforms, website builders, and marketplaces to embed accessibility directly into their core product. This allows them to offer accessibility as a native feature to their end-users, enhancing their platform's value proposition.
+
+Non-Profit Community: https://accessibe.com/partners/nonprofit - A partnership program offering free or heavily discounted accessibility solutions to registered non-profit organizations. This initiative reinforces accessiBe's commitment to creating a more inclusive internet and builds community trust by supporting mission-driven organizations.
+
+## Resources & Learning Center
+
+The accessiBe Blog: https://accessibe.com/blog - A regularly updated blog featuring articles on accessibility education, industry news, compliance trends, legal rulings, and company product updates.
+
+Case Studies: https://accessibe.com/case-studies - A collection of success stories and testimonials from real clients, demonstrating the business impact, SEO benefits, and legal advantages of implementing accessiBe's solutions.
+
+Accessibility Glossary: https://accessibe.com/glossary - An extensive A-Z glossary that defines key terms and concepts in the world of web accessibility, including technical terms like "ARIA" and "WCAG" and concepts like "Inclusivity" and "Reasonable Accommodation".
+
+Compliance Guides: https://accessibe.com/compliance - A central resource hub with detailed information, guides, and checklists for major global accessibility regulations, including the Americans with Disabilities Act (ADA), Web Content Accessibility Guidelines (WCAG) 2.1, Accessibility for Ontarians with Disabilities Act (AODA), European Accessibility Act (EAA), and Section 508.
+
+Support Center: https://accessibe.com/support - A comprehensive support portal with guides and resources for installation on various platforms, account management, technical support, troubleshooting, and product assistance.
+
+Customer Examples: https://accessibe.com/examples - A showcase of live websites from a wide range of industries and brands (e.g., BMW, UCLA Health, Nintendo, British Airways) that are using `accessWidget`, allowing prospective customers to see the tool in action on real-world sites.
+
+The Accessibility Interface: https://accessibe.com/accessibility-interface - A detailed explanation and interactive demonstration of the user-facing interface of `accessWidget`. This page explains the various profiles (e.g., Seizure Safe, Vision Impaired) and individual adjustments users can make to customize their browsing experience.
+
+Artificial Intelligence in Accessibility: https://accessibe.com/artificial-intelligence - An in-depth explanation of how accessiBe leverages AI technologies, including contextual understanding and computer vision, to analyze website structures, understand element roles, and apply complex accessibility remediations for ARIA attributes, forms, and more.
+
+## Company
+
+Our Company & Mission: https://accessibe.com/company - An overview of the company's mission to make the internet accessible, its community-first approach developed with input from people with disabilities, and its vision for a more inclusive digital world.
+
+Our Vision: https://accessibe.com/company/vision - A dedicated page outlining the company's long-term vision and its commitment to making digital accessibility simple, automated, and affordable for businesses of all sizes, thereby achieving accessibility at scale.
+
+Careers at accessiBe: https://accessibe.com/company/careers - Information on open positions, company culture (`accessCulture`), and benefits for prospective employees looking to join the accessiBe team.
+
+Customer Reviews: https://accessibe.com/reviews - A curated collection of testimonials and reviews from customers on independent platforms like G2, TrustPilot, and WordPress, providing social proof and user feedback.
+
+Security & Compliance: https://accessibe.com/security - Details on the company's commitment to data security and privacy, including its SOC2 compliance and other stringent security standards designed to protect customer and user data.
+
+Global Accessibility Awareness Day (GAAD): https://accessibe.com/gaad - A resource page dedicated to GAAD, an annual event to raise awareness about digital access and inclusion. The page provides social media kits, guides, and information about accessiBe's events and initiatives for the day.
+
+## Legal & Policies
+
+Terms of Service: https://accessibe.com/terms-of-service - The comprehensive legal agreement governing the use of accessiBe's website, products, and services. It includes details on subscriptions, payment, liability, intellectual property, and dispute resolution.
+
+Privacy Notice: https://accessibe.com/privacy-notice - The policy detailing how accessiBe collects, uses, shares, and protects user and customer data. It outlines user rights and the company's compliance with data protection regulations like GDPR and CCPA.
+
+Data Processing Addendum: https://accessibe.com/data-processing-addendum - The legal addendum that applies to the processing of personal information through any Service, relevant for customers concerned with data processing compliance.
+
+Prohibited Activity and Improper Conduct Policy: https://accessibe.com/prohibited-activity - The policy outlining rules of conduct, particularly relevant for programs such as the Customer Referral Program.
+
+## Account & General
+
+Pricing: https://accessibe.com/pricing/accesswidget - Detailed pricing plans for `accessWidget` and other solutions. This page outlines the features available at each tier, such as Micro ($490/year), Growth ($1,490/year), and Scale ($3,990/year), as well as custom Enterprise plans.
+
+Login to Your Account: https://dashboard.accessibe.com - The sign-in page for existing customers to access their account dashboard, manage their subscriptions, and view compliance reports.
+
+Start a Free Trial: https://dashboard.accessibe.com/app/signup - The registration page for new users to sign up for a 7-day free trial of accessiBe's products, allowing them to test the solution on their own website.
+
+Request a Demo: https://accessibe.com/#popup-demo - A primary call-to-action for prospective customers to schedule a live demonstration of accessiBe's solutions with a product expert.
+
+Contact Us: https://accessibe.com/support#supportContact - The main contact point for sales inquiries, technical support, and general questions about accessiBe's products and services.
+
+## Optional: In-Depth Guides & Knowledge Base
+
+WCAG 2.1 & 2.2 AA Checklist: https://accessibe.com/blog/knowledgebase/wcag-checklist - A comprehensive checklist for developers and website owners to manually verify compliance with WCAG 2.1 and 2.2 AA standards.
+
+ADA vs. WCAG: What's the Difference?: https://accessibe.com/blog/knowledgebase/ada-vs-wcag - An article explaining the relationship between the Americans with Disabilities Act (ADA) and the Web Content Accessibility Guidelines (WCAG), and how they apply to website compliance in the U.S.
+
+European Accessibility Act (EAA) Compliance Checklist: https://accessibe.com/blog/knowledgebase/eaa-compliance-checklist - A guide specifically for businesses operating in the EU, detailing the requirements of the European Accessibility Act (EAA) and providing a checklist for compliance before the 2025 deadline.
+
+Why Most Accessibility Lawsuits Target Online Stores: https://accessibe.com/blog/knowledgebase/why-most-accessibility-lawsuits-target-online-stores - An analysis of legal trends in digital accessibility, focusing on the e-commerce sector and providing actionable advice for online retailers to mitigate risk.
+
+How to Make Your WordPress Website Accessible: https://accessibe.com/blog/knowledgebase/wordpress-website-accessibility - A step-by-step guide for WordPress users on achieving accessibility, covering topics like choosing accessible themes, ensuring keyboard navigation, and using plugins effectively.
+
+The Best Color Contrast Checker Tools: https://accessibe.com/blog/knowledgebase/color-contrast-checker-tools - A curated list of tools to help designers and developers test and ensure their website's color schemes meet WCAG contrast ratio requirements.
+
+Web Accessibility for the Healthcare Industry: https://accessibe.com/blog/knowledgebase/web-accessibility-for-healthcare - An article outlining the legal requirements and business benefits of web accessibility for the healthcare industry, including improving patient access to information.
+
+The Impact of AI on Digital Accessibility: https://accessibe.com/blog/knowledgebase/impact-of-ai-on-digital-accessibility - A thought leadership piece on the evolving role of Artificial Intelligence in making the web more accessible, discussing both the potential and the current limitations.
+
+Court Rules Websites are 'Public Accommodations' Under the ADA: https://accessibe.com/blog/knowledgebase/court-rules-websites-public-accommodations-under-ada - A summary and analysis of a landmark legal ruling that affirmed websites are considered "places of public accommodation" under the ADA, reinforcing the legal basis for web accessibility lawsuits.
+
+What is an Accessibility Statement?: https://accessibe.com/glossary/accessibility-statement - A detailed explanation of what an accessibility statement is, why it is important for legal compliance and user trust, and what elements it should include.
+
+How to Respond to an ADA Demand Letter: https://accessibe.com/blog/knowledgebase/ada-website-compliance-demand-letter - A practical guide for businesses on the steps to take after receiving a legal demand letter regarding their website's accessibility.
+
+Court Affirms accessiBe's Role in Website Accessibility: https://accessibe.com/blog/knowledgebase/court-affirms-accesswidget-role-in-accessibility - An article discussing a specific court case where the use of accessiBe's `accessWidget` was viewed favorably, serving as a key piece of validation for the product's role in compliance efforts.
