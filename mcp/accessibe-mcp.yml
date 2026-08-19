@@ -13,7 +13,9 @@ server:
   transports:
   - transport: stdio
     command: npx
-    args: ['-y', accessflow-mcp-server]
+    args:
+    - -y
+    - accessflow-mcp-server
     env:
       API_KEY: accessFlow AI MCP token (required)
       DOMAIN: the domain of the application being analyzed (required)
@@ -33,24 +35,25 @@ probe:
   method: POST tools/list (jsonrpc 2.0)
   http_status: 401
   result: auth-gated
-  note: Live tools/list requires a bearer token, so per-tool inputSchema could not be
-    introspected anonymously. The tool set and parameters below are transcribed from
-    the published package documentation, not invented.
+  note: Live tools/list requires a bearer token, so per-tool inputSchema could not be introspected anonymously.
+    The tool set and parameters below are transcribed from the published package documentation, not invented.
 tools:
 - name: getMostUrgentIssues
-  description: Retrieves the most critical accessibility issues, prioritized by severity
-    (Extreme, High, Medium, Low), then by site impact (number of locations affected
-    across the site), then by page impact (occurrences on individual pages).
-  returns: JSON data with structured issue information including severity, WCAG level,
-    occurrence counts, and unique identifiers.
+  description: Retrieves the most critical accessibility issues, prioritized by severity (Extreme, High,
+    Medium, Low), then by site impact (number of locations affected across the site), then by page impact
+    (occurrences on individual pages).
+  returns: JSON data with structured issue information including severity, WCAG level, occurrence counts,
+    and unique identifiers.
   parameters:
   - name: auditSource
     type: enum
     required: false
-    values: [PLATFORM, SDK]
+    values:
+    - PLATFORM
+    - SDK
     default: PLATFORM
-    description: PLATFORM returns issues from the latest accessFlow platform audit;
-      SDK returns issues from the specified SDK audit.
+    description: PLATFORM returns issues from the latest accessFlow platform audit; SDK returns issues
+      from the specified SDK audit.
   - name: commitId
     type: string
     required: when auditSource is SDK
@@ -64,27 +67,27 @@ tools:
     required: false
     description: Branch name for the SDK audit, to narrow results.
 - name: getIssueRemediation
-  description: Provides detailed remediation guidance for a specific accessibility
-    issue — problem summary and WCAG references, the current problematic code, suggested
-    code fixes with examples, step-by-step remediation instructions, and links to
-    tutorials.
+  description: Provides detailed remediation guidance for a specific accessibility issue — problem summary
+    and WCAG references, the current problematic code, suggested code fixes with examples, step-by-step
+    remediation instructions, and links to tutorials.
   parameters:
   - name: issueDisplayName
     type: string
     required: true
-    description: The unique identifier for the accessibility issue (for example
-      Decorative-Content-6d277a13ba).
+    description: The unique identifier for the accessibility issue (for example Decorative-Content-6d277a13ba).
   - name: auditSource
     type: enum
     required: false
-    values: [PLATFORM, SDK]
+    values:
+    - PLATFORM
+    - SDK
     default: PLATFORM
   - name: commitId
     type: string
     required: when auditSource is SDK
 - name: resolveIssue
-  description: Marks the specified issue as resolved in accessFlow. If the next audit
-    still detects the issue, it is reopened automatically.
+  description: Marks the specified issue as resolved in accessFlow. If the next audit still detects the
+    issue, it is reopened automatically.
   parameters:
   - name: issueDisplayName
     type: string
@@ -92,7 +95,9 @@ tools:
   - name: auditSource
     type: enum
     required: false
-    values: [PLATFORM, SDK]
+    values:
+    - PLATFORM
+    - SDK
     default: PLATFORM
   - name: commitId
     type: string
@@ -102,7 +107,14 @@ supported_clients:
 - Cursor
 - Any MCP-compatible client
 well_known:
-  '/.well-known/oauth-authorization-server': 404
-  '/.well-known/oauth-protected-resource': 404
-  note: The server publishes no OAuth discovery documents; authentication is a static
-    bearer token, not an OAuth flow.
+  /.well-known/oauth-authorization-server: 404
+  /.well-known/oauth-protected-resource: 404
+  note: The server publishes no OAuth discovery documents; authentication is a static bearer token, not
+    an OAuth flow.
+deployment:
+  mode: remote
+  endpoint: https://flow-mcp.accessibe.com/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census
