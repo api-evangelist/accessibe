@@ -54,6 +54,11 @@ apis:
   - Licenses
   - Accessibility
   - Partners
+  - Account
+  tags_raw:
+  - Licenses
+  - Accessibility
+  - Partners
   - Accounts
   properties:
   - type: OpenAPI
