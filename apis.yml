@@ -38,47 +38,15 @@ tags:
 - Quality Assurance
 - Artificial Intelligence
 apis:
-- aid: accessibe:partners-api
-  name: accessiBe Partners API License
-  description: 'The Partners API allows accessiBe partners to manage accessWidget
-    licenses programmatically across their accounts, with full control over the license
-    lifecycle: create, retrieve, list, filter and update licenses, plus asynchronous
-    batch create and batch update of up to 150 licenses per request with a batch status
-    endpoint. Authentication is a per-account API key supplied in the x-api-key header;
-    the account must be enabled as a partner account. Listing supports cursor pagination
-    (nextToken + limit) and filtering by status and domain, and the batch endpoints
-    accept an Idempotency-Key header so a request is processed only once.'
-  humanURL: https://dashboard.accessibe.com/api/v1/partners/docs
-  baseURL: https://dashboard.accessibe.com/api/v1/partners
-  tags:
-  - Licenses
-  - Accessibility
-  - Partners
-  - Account
-  tags_raw:
-  - Licenses
-  - Accessibility
-  - Partners
-  - Accounts
-  properties:
-  - type: OpenAPI
-    url: openapi/accessibe-partners-openapi-original.yml
-  - type: Overlay
-    url: overlays/accessibe-partners-overlay.yaml
-  - type: Documentation
-    url: https://dashboard.accessibe.com/api/v1/partners/docs
-  - type: APIReference
-    url: https://dashboard.accessibe.com/api/v1/partners/docs
 - aid: accessibe:accessflow-mcp
   name: accessFlow MCP Server
-  description: 'The accessFlow Model Context Protocol server connects AI clients such
-    as GitHub Copilot and Cursor directly to accessFlow accessibility data. It exposes
-    three tools — getMostUrgentIssues, getIssueRemediation and resolveIssue — over
-    both a local stdio transport (npx accessflow-mcp-server, configured with API_KEY
-    and DOMAIN) and a hosted remote HTTP transport at https://flow-mcp.accessibe.com/mcp
-    authenticated with a bearer AI MCP token plus an X-Domain header. It works against
-    both accessFlow platform audits and SDK-based audits selected via the auditSource
-    parameter.'
+  description: >-
+    The accessFlow Model Context Protocol server connects AI clients such as GitHub Copilot and Cursor
+    directly to accessFlow accessibility data. It exposes three tools — getMostUrgentIssues, getIssueRemediation
+    and resolveIssue — over both a local stdio transport (npx accessflow-mcp-server, configured with API_KEY
+    and DOMAIN) and a hosted remote HTTP transport at https://flow-mcp.accessibe.com/mcp authenticated
+    with a bearer AI MCP token plus an X-Domain header. It works against both accessFlow platform audits
+    and SDK-based audits selected via the auditSource parameter.
   humanURL: https://www.npmjs.com/package/accessflow-mcp-server
   baseURL: https://flow-mcp.accessibe.com/mcp
   tags:
@@ -91,6 +59,20 @@ apis:
     url: mcp/accessibe-mcp.yml
   - type: Documentation
     url: https://accessibe.com/blog/knowledgebase/accessflows-sdk-and-mcp
+- aid: accessibe:accessibe-accounts-api
+  name: accessiBe Accounts API
+  description: The Accounts API from accessiBe — 5 operation(s) for accounts.
+  humanURL: https://dashboard.accessibe.com/api/v1/partners/docs
+  baseURL: https://dashboard.accessibe.com/api/v1/partners
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/accessibe-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://dashboard.accessibe.com/api/v1/partners/docs
+  - type: APIReference
+    url: https://dashboard.accessibe.com/api/v1/partners/docs
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
