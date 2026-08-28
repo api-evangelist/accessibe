@@ -12,6 +12,18 @@ description: 'accessiBe is a web accessibility technology company whose products
   Partners API for programmatic accessWidget license management and a first-party
   accessFlow MCP server that connects IDE AI assistants to accessibility audit findings
   and remediation guidance.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://accessibe.com/wp-content/uploads/2026/01/favicon.png
 url: https://raw.githubusercontent.com/api-evangelist/accessibe/refs/heads/main/apis.yml
 x-type: company
