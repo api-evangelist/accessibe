@@ -77,6 +77,8 @@ apis:
   humanURL: https://dashboard.accessibe.com/api/v1/partners/docs
   baseURL: https://dashboard.accessibe.com/api/v1/partners
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
