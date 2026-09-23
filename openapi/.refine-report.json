@@ -1,0 +1,28 @@
+{
+  "provider": "accessibe",
+  "sources": [
+    "_original/accessibe-partners-openapi-original.yml"
+  ],
+  "outputs": [
+    "accessibe-accounts-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "accessibe-partners-openapi-original.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "accessibe-partners-openapi-original.yml: tagged paths GET /accounts/{accountId}/access-widget-licenses/{licenseId} -> Accounts",
+    "accessibe-partners-openapi-original.yml: tagged paths PATCH /accounts/{accountId}/access-widget-licenses/{licenseId} -> Accounts",
+    "accessibe-partners-openapi-original.yml: tagged paths GET /accounts/{accountId}/access-widget-licenses -> Accounts",
+    "accessibe-partners-openapi-original.yml: tagged paths POST /accounts/{accountId}/access-widget-licenses -> Accounts",
+    "accessibe-partners-openapi-original.yml: tagged paths POST /accounts/{accountId}/access-widget-licenses/batch-create -> Accounts",
+    "accessibe-partners-openapi-original.yml: tagged paths POST /accounts/{accountId}/access-widget-licenses/batch-update -> Accounts",
+    "accessibe-partners-openapi-original.yml: tagged paths GET /accounts/{accountId}/access-widget-licenses/batch/{batchId} -> Accounts",
+    "accessibe-partners-openapi-original.yml: declared missing tag: Accounts",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "accessibe-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
