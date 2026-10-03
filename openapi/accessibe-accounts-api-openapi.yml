@@ -596,7 +596,464 @@ paths:
       operationId: getAccountsByAccountIdAccessWidgetLicensesBatchByBatchId
       x-operation-id-source: derived
 components:
+  examples:
+    BatchLicenseUpdateResponseExample:
+      value:
+        success: true
+        data:
+          batchId: 6655ffdaaf3c1a7b866ad60b
+          status: processing
+          operation: update
+          getBatchStatusURL: https://dashboard.accessibe.com/api/v1/partners/accounts/6655ffde924acc9586252c9e/access-widget-licenses/batch/6655ffdaaf3c1a7b866ad60b
+    LicenseUpdateRequestExample:
+      value:
+        domain: example.com
+        planSKU: 1
+        contactName: John Doe
+        contactEmail: john.doe@accessibe.com
+        contactPhone: '5551234567'
+        contactCountryCode: US
+        settings:
+          default: false
+          leadColor: '#146FF8'
+          language: en
+          position: right
+          triggerColor: '#146FF8'
+          triggerPositionX: right
+          triggerPositionY: bottom
+          triggerSize: medium
+          triggerRadius: 50%
+          hideTrigger: false
+          triggerOffsetX: 20
+          triggerOffsetY: 20
+          triggerIcon: people
+          hideMobile: false
+          mobile:
+            triggerPositionX: right
+            triggerPositionY: bottom
+            triggerSize: small
+            triggerRadius: 50%
+            triggerOffsetX: 10
+            triggerOffsetY: 10
+          statementLink: ''
+          footerHtml: ''
+    GetBatchStatusCompletedExample:
+      value:
+        success: true
+        data:
+          batchId: 6655ffdaaf3c1a7b866ad60b
+          hasErrors: false
+          operation: create
+          status: completed
+          successLicenses:
+          - domain: example1.com
+            getLicenseURL: https://dashboard.accessibe.com/api/v1/partners/accounts/6655ffde924acc9586252c9e/access-widget-licenses/6655ffdaaf3c1a7b866ad60b
+            licenseId: 6655ffdaaf3c1a7b866ad60b
+          - domain: example2.com
+            getLicenseURL: https://dashboard.accessibe.com/api/v1/partners/accounts/6655ffde924acc9586252c9e/access-widget-licenses/6655ffdaaf3c1a7b866ad60c
+            licenseId: 6655ffdaaf3c1a7b866ad60c
+          failedLicenses: []
+          total: 2
+          totalFailures: 0
+          totalSuccesses: 2
+    BatchLicenseCreateRequestExample:
+      value:
+        licenses:
+        - domain: example1.com
+          planSKU: 1
+          contactName: John Doe
+          contactEmail: john.doe@example1.com
+          contactPhone: '5551234567'
+          contactCountryCode: US
+        - domain: example2.com
+          planSKU: 2
+          contactName: Jane Doe
+          contactEmail: jane.doe@example2.com
+          contactPhone: '5557654321'
+          contactCountryCode: US
+    BatchLicenseCreateResponseExample:
+      value:
+        success: true
+        data:
+          batchId: 6655ffdaaf3c1a7b866ad60b
+          status: processing
+          operation: create
+          getBatchStatusURL: https://dashboard.accessibe.com/api/v1/partners/accounts/6655ffde924acc9586252c9e/access-widget-licenses/batch/6655ffdaaf3c1a7b866ad60b
+    BatchLicenseUpdateRequestExample:
+      value:
+        licenses:
+        - domain: example1.com
+          newDomain: test1.com
+          planSKU: 1
+          contactName: John Doe
+          contactEmail: johndoe@accessibe.com
+          contactPhone: '5551234567'
+          contactCountryCode: US
+          discountEnabled: true
+          monthly: false
+          activate: true
+          settings:
+            default: false
+            position: right
+        - domain: example2.com
+          newDomain: test2.com
+          planSKU: 2
+          contactName: Jane Doe
+          contactEmail: janedoe@accessibe.com
+          contactPhone: '5557654321'
+          contactCountryCode: US
+    LicenseCreateOrUpdateResponseExample:
+      value:
+        success: true
+        data:
+          id: 6655ffdaaf3c1a7b866ad60b
+          date: '2023-12-01T00:00:00Z'
+          relatedAccountId: 6655ffde924acc9586252c9e
+          domain: example.com
+          status: active
+          price: 100
+          licenseType: offline
+          plan:
+            name: Standard
+            planSKU: 1
+          relatedBillingId: 6655ffc7ff28ed0683f30ca3
+          statementDate: '2023-12-01T00:00:00Z'
+          dateTrialExpires: '2024-01-01T00:00:00Z'
+          datePlanExpires: '2024-12-01T00:00:00Z'
+          datePlanFirstActivated: '2023-12-01T00:00:00Z'
+          lastSubscriptionPaymentId: 6655ffce1a84015a561e119b
+          enableGoogleAnalytics: true
+          enableRemediationReport: true
+          monthly: false
+          autoRenew: true
+          contactName: John Doe
+          contactEmail: john.doe@example.com
+          contactPhone: '5551234567'
+          contactCountry: United States
+    SingleLicenseExample:
+      value:
+        success: true
+        data:
+        - id: 6655ffdaaf3c1a7b866ad60b
+          date: 2023-12-01 00:00:00+00:00
+          relatedAccountId: 6655ffde924acc9586252c9e
+          domain: example.com
+          status: active
+          price: 100
+          licenseType: offline
+          plan:
+            name: Standard
+            planSKU: 1
+          relatedBillingId: 6655ffc7ff28ed0683f30ca3
+          statementDate: 2023-12-01 00:00:00+00:00
+          dateTrialExpires: 2024-01-01 00:00:00+00:00
+          datePlanExpires: 2024-12-01 00:00:00+00:00
+          datePlanFirstActivated: 2023-12-01 00:00:00+00:00
+          lastSubscriptionPaymentId: 6655ffce1a84015a561e119b
+          enableGoogleAnalytics: true
+          enableRemediationReport: true
+          monthly: false
+          autoRenew: true
+          contactName: John Doe
+          contactEmail: john.doe@example.com
+          contactPhone: 5551234567
+          contactCountry: United States
+          settings:
+            leadColor: '#146FF8'
+            language: en
+            position: right
+            triggerColor: '#146FF8'
+            triggerPositionX: right
+            triggerPositionY: bottom
+            triggerSize: medium
+            triggerRadius: 50%
+            hideTrigger: false
+            triggerOffsetX: 20
+            triggerOffsetY: 20
+            triggerIcon: people
+            hideMobile: false
+            mobile:
+              triggerPositionX: right
+              triggerPositionY: bottom
+              triggerSize: small
+              triggerRadius: 50%
+              triggerOffsetX: 10
+              triggerOffsetY: 10
+            statementLink: ''
+            footerHtml: ''
+          maxImagesReached: false
+          maxImagesLimit: 5000
+    GetBatchStatusProcessingExample:
+      value:
+        success: true
+        data:
+          batchId: 6655ffdaaf3c1a7b866ad60b
+          hasErrors: false
+          operation: update
+          status: processing
+          successLicenses: []
+          failedLicenses: []
+          total: 2
+          totalFailures: 0
+          totalSuccesses: 0
+    LicenseRequestExample:
+      value:
+        domain: example.com
+        planSKU: 1
+        contactName: John Doe
+        contactEmail: john.doe@accessibe.com
+        contactPhone: '5551234567'
+        contactCountryCode: US
+        settings:
+          default: false
+          leadColor: '#146FF8'
+    ManyLicensesExample:
+      value:
+        success: true
+        data:
+          total: 1
+          nextToken: 6140cdf15d3df50b78eeadd5
+          licenses:
+          - id: 6655ffdaaf3c1a7b866ad60b
+            date: 2023-12-01 00:00:00+00:00
+            relatedAccountId: 6655ffde924acc9586252c9e
+            domain: example.com
+            status: active
+            price: 100
+            licenseType: offline
+            plan:
+              name: Standard
+              planSKU: 1
+            relatedBillingId: 6655ffc7ff28ed0683f30ca3
+            statementDate: 2023-12-01 00:00:00+00:00
+            dateTrialExpires: 2024-01-01 00:00:00+00:00
+            datePlanExpires: 2024-12-01 00:00:00+00:00
+            datePlanFirstActivated: 2023-12-01 00:00:00+00:00
+            lastSubscriptionPaymentId: 6655ffce1a84015a561e119b
+            enableGoogleAnalytics: true
+            enableRemediationReport: true
+            monthly: false
+            autoRenew: true
+            contactName: John Doe
+            contactEmail: john.doe@example.com
+            contactPhone: 5551234567
+            contactCountry: United States
+            settings:
+              leadColor: '#146FF8'
+              language: en
+              position: right
+              triggerColor: '#146FF8'
+              triggerPositionX: right
+              triggerPositionY: bottom
+              triggerSize: medium
+              triggerRadius: 50%
+              hideTrigger: false
+              triggerOffsetX: 20
+              triggerOffsetY: 20
+              triggerIcon: people
+              hideMobile: false
+              mobile:
+                triggerPositionX: right
+                triggerPositionY: bottom
+                triggerSize: small
+                triggerRadius: 50%
+                triggerOffsetX: 10
+                triggerOffsetY: 10
+              statementLink: ''
+              footerHtml: ''
+            maxImagesReached: false
+            maxImagesLimit: 5000
   schemas:
+    GetBatchStatus:
+      type: object
+      properties:
+        batchId:
+          type: string
+        hasErrors:
+          type: boolean
+        operation:
+          type: string
+          enum:
+          - create
+          - update
+        status:
+          type: string
+          enum:
+          - processing
+          - completed
+        successLicenses:
+          type: array
+          items:
+            type: object
+            properties:
+              domain:
+                type: string
+              getLicenseURL:
+                type: string
+              licenseId:
+                type: string
+        failedLicenses:
+          type: array
+          items:
+            type: object
+            properties:
+              domain:
+                type: string
+              message:
+                type: string
+        total:
+          type: integer
+          description: The total number given in the request
+        totalFailures:
+          type: integer
+        totalSuccesses:
+          type: integer
+    CreateLicense:
+      type: object
+      required:
+      - domain
+      - planSKU
+      properties:
+        domain:
+          type: string
+          example: example.com
+          description: Domain name for which the license is being created
+        planSKU:
+          type: number
+          enum:
+          - 1
+          - 2
+          - 3
+          - 5
+          - 21
+          - 22
+          - 23
+          example: 1
+          description: Plan SKU for the license
+        contactName:
+          type: string
+          example: John Doe
+          description: Full name of the contact for this license
+        contactEmail:
+          type: string
+          example: johndoe@accessibe.com
+          description: Contact email address for this license
+        contactPhone:
+          type: string
+          example: '5551234567'
+          description: Contact phone number for this license
+        contactCountryCode:
+          type: string
+          example: US
+          description: Contact country code for this license
+        discountEnabled:
+          description: Set to true to enable discounts for the account. Set to false to get commissions instead of discounts. The parameter activate below must be set to true
+          type: boolean
+          default: true
+        monthly:
+          type: boolean
+          description: For monthly subscription can pass it as true, else it will be yearly
+          default: false
+        activate:
+          type: boolean
+          description: Activate the license, need to have in the account allowActivationByApi set to true
+          default: false
+        longTrial:
+          type: boolean
+          description: Assign a long trial period for 30 days, need to have in the account allowLongTrialByApi set to true
+          default: false
+        settings:
+          $ref: '#/components/schemas/CreateSettings'
+          description: 'Widget settings. All fields inside `settings` are optional.
+
+            If any field is `null`, that specific field set to the default setting.
+
+            If `default` is `true` within this object, **all** fields revert to default regardless of other values.
+
+            '
+    License:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        relatedAccountId:
+          type: string
+        domain:
+          type: string
+        status:
+          enum:
+          - active
+          - grace
+          - expired
+          - trial
+        price:
+          type: number
+        licenseType:
+          type: string
+        plan:
+          $ref: '#/components/schemas/Plan'
+        relatedBillingId:
+          type:
+          - string
+          - 'null'
+        statementDate:
+          type: string
+          format: date-time
+        dateTrialExpires:
+          type: string
+          format: date-time
+        datePlanExpires:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        datePlanFirstActivated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        lastSubscriptionPaymentId:
+          type:
+          - string
+          - 'null'
+        enableGoogleAnalytics:
+          type: boolean
+        enableRemediationReport:
+          type: boolean
+        monthly:
+          type: boolean
+        autoRenew:
+          type: boolean
+        contactName:
+          type:
+          - string
+          - 'null'
+        contactEmail:
+          type:
+          - string
+          - 'null'
+        contactPhone:
+          type:
+          - string
+          - 'null'
+        contactCountry:
+          type:
+          - string
+          - 'null'
+        settings:
+          $ref: '#/components/schemas/LicenseSettings'
+          description: Widget settings object
+        maxImagesReached:
+          type: boolean
+          readOnly: true
+          description: Indicates if the maximum allowed images have been reached for this license
+        maxImagesLimit:
+          type: number
+          readOnly: true
+          description: Shows the maximum images limit for this license
     CreateSettings:
       type: object
       properties:
@@ -731,50 +1188,6 @@ components:
           type: string
         footerHtml:
           type: string
-    GetBatchStatus:
-      type: object
-      properties:
-        batchId:
-          type: string
-        hasErrors:
-          type: boolean
-        operation:
-          type: string
-          enum:
-          - create
-          - update
-        status:
-          type: string
-          enum:
-          - processing
-          - completed
-        successLicenses:
-          type: array
-          items:
-            type: object
-            properties:
-              domain:
-                type: string
-              getLicenseURL:
-                type: string
-              licenseId:
-                type: string
-        failedLicenses:
-          type: array
-          items:
-            type: object
-            properties:
-              domain:
-                type: string
-              message:
-                type: string
-        total:
-          type: integer
-          description: The total number given in the request
-        totalFailures:
-          type: integer
-        totalSuccesses:
-          type: integer
     UpdateLicense:
       type: object
       required:
@@ -841,6 +1254,15 @@ components:
             If `default` is `true` within this object, all fields revert to default regardless of other values.
 
             '
+    Plan:
+      type:
+      - object
+      - 'null'
+      properties:
+        name:
+          type: string
+        planSKU:
+          type: number
     LicenseCreateOrUpdateResponse:
       type: object
       properties:
@@ -913,98 +1335,6 @@ components:
           type:
           - string
           - 'null'
-    License:
-      type: object
-      properties:
-        id:
-          type: string
-        date:
-          type: string
-          format: date-time
-        relatedAccountId:
-          type: string
-        domain:
-          type: string
-        status:
-          enum:
-          - active
-          - grace
-          - expired
-          - trial
-        price:
-          type: number
-        licenseType:
-          type: string
-        plan:
-          $ref: '#/components/schemas/Plan'
-        relatedBillingId:
-          type:
-          - string
-          - 'null'
-        statementDate:
-          type: string
-          format: date-time
-        dateTrialExpires:
-          type: string
-          format: date-time
-        datePlanExpires:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        datePlanFirstActivated:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        lastSubscriptionPaymentId:
-          type:
-          - string
-          - 'null'
-        enableGoogleAnalytics:
-          type: boolean
-        enableRemediationReport:
-          type: boolean
-        monthly:
-          type: boolean
-        autoRenew:
-          type: boolean
-        contactName:
-          type:
-          - string
-          - 'null'
-        contactEmail:
-          type:
-          - string
-          - 'null'
-        contactPhone:
-          type:
-          - string
-          - 'null'
-        contactCountry:
-          type:
-          - string
-          - 'null'
-        settings:
-          $ref: '#/components/schemas/LicenseSettings'
-          description: Widget settings object
-        maxImagesReached:
-          type: boolean
-          readOnly: true
-          description: Indicates if the maximum allowed images have been reached for this license
-        maxImagesLimit:
-          type: number
-          readOnly: true
-          description: Shows the maximum images limit for this license
-    Plan:
-      type:
-      - object
-      - 'null'
-      properties:
-        name:
-          type: string
-        planSKU:
-          type: number
     UpdateSettings:
       type: object
       properties:
@@ -1187,69 +1517,6 @@ components:
           type:
           - string
           - 'null'
-    CreateLicense:
-      type: object
-      required:
-      - domain
-      - planSKU
-      properties:
-        domain:
-          type: string
-          example: example.com
-          description: Domain name for which the license is being created
-        planSKU:
-          type: number
-          enum:
-          - 1
-          - 2
-          - 3
-          - 5
-          - 21
-          - 22
-          - 23
-          example: 1
-          description: Plan SKU for the license
-        contactName:
-          type: string
-          example: John Doe
-          description: Full name of the contact for this license
-        contactEmail:
-          type: string
-          example: johndoe@accessibe.com
-          description: Contact email address for this license
-        contactPhone:
-          type: string
-          example: '5551234567'
-          description: Contact phone number for this license
-        contactCountryCode:
-          type: string
-          example: US
-          description: Contact country code for this license
-        discountEnabled:
-          description: Set to true to enable discounts for the account. Set to false to get commissions instead of discounts. The parameter activate below must be set to true
-          type: boolean
-          default: true
-        monthly:
-          type: boolean
-          description: For monthly subscription can pass it as true, else it will be yearly
-          default: false
-        activate:
-          type: boolean
-          description: Activate the license, need to have in the account allowActivationByApi set to true
-          default: false
-        longTrial:
-          type: boolean
-          description: Assign a long trial period for 30 days, need to have in the account allowLongTrialByApi set to true
-          default: false
-        settings:
-          $ref: '#/components/schemas/CreateSettings'
-          description: 'Widget settings. All fields inside `settings` are optional.
-
-            If any field is `null`, that specific field set to the default setting.
-
-            If `default` is `true` within this object, **all** fields revert to default regardless of other values.
-
-            '
     LicenseSettings:
       type: object
       properties:
@@ -1428,21 +1695,6 @@ components:
           - string
           - 'null'
   responses:
-    ForbiddenError:
-      description: Account does not have access to do this operation
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              message:
-                type: string
-                enum:
-                - Could not find a partner account with the provided API key
-                - Account does not have access to partners API
     NotFound:
       description: License not found
       content:
@@ -1482,6 +1734,21 @@ components:
                 enum:
                 - Domain already being used
                 - Domain already exists in account
+    ForbiddenError:
+      description: Account does not have access to do this operation
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                enum:
+                - Could not find a partner account with the provided API key
+                - Account does not have access to partners API
     UnauthorizedError:
       description: Missing or invalid API key
       content:
@@ -1495,273 +1762,6 @@ components:
               message:
                 type: string
                 example: Missing x-api-key in headers
-  examples:
-    LicenseCreateOrUpdateResponseExample:
-      value:
-        success: true
-        data:
-          id: 6655ffdaaf3c1a7b866ad60b
-          date: '2023-12-01T00:00:00Z'
-          relatedAccountId: 6655ffde924acc9586252c9e
-          domain: example.com
-          status: active
-          price: 100
-          licenseType: offline
-          plan:
-            name: Standard
-            planSKU: 1
-          relatedBillingId: 6655ffc7ff28ed0683f30ca3
-          statementDate: '2023-12-01T00:00:00Z'
-          dateTrialExpires: '2024-01-01T00:00:00Z'
-          datePlanExpires: '2024-12-01T00:00:00Z'
-          datePlanFirstActivated: '2023-12-01T00:00:00Z'
-          lastSubscriptionPaymentId: 6655ffce1a84015a561e119b
-          enableGoogleAnalytics: true
-          enableRemediationReport: true
-          monthly: false
-          autoRenew: true
-          contactName: John Doe
-          contactEmail: john.doe@example.com
-          contactPhone: '5551234567'
-          contactCountry: United States
-    LicenseRequestExample:
-      value:
-        domain: example.com
-        planSKU: 1
-        contactName: John Doe
-        contactEmail: john.doe@accessibe.com
-        contactPhone: '5551234567'
-        contactCountryCode: US
-        settings:
-          default: false
-          leadColor: '#146FF8'
-    BatchLicenseCreateRequestExample:
-      value:
-        licenses:
-        - domain: example1.com
-          planSKU: 1
-          contactName: John Doe
-          contactEmail: john.doe@example1.com
-          contactPhone: '5551234567'
-          contactCountryCode: US
-        - domain: example2.com
-          planSKU: 2
-          contactName: Jane Doe
-          contactEmail: jane.doe@example2.com
-          contactPhone: '5557654321'
-          contactCountryCode: US
-    GetBatchStatusProcessingExample:
-      value:
-        success: true
-        data:
-          batchId: 6655ffdaaf3c1a7b866ad60b
-          hasErrors: false
-          operation: update
-          status: processing
-          successLicenses: []
-          failedLicenses: []
-          total: 2
-          totalFailures: 0
-          totalSuccesses: 0
-    BatchLicenseUpdateResponseExample:
-      value:
-        success: true
-        data:
-          batchId: 6655ffdaaf3c1a7b866ad60b
-          status: processing
-          operation: update
-          getBatchStatusURL: https://dashboard.accessibe.com/api/v1/partners/accounts/6655ffde924acc9586252c9e/access-widget-licenses/batch/6655ffdaaf3c1a7b866ad60b
-    GetBatchStatusCompletedExample:
-      value:
-        success: true
-        data:
-          batchId: 6655ffdaaf3c1a7b866ad60b
-          hasErrors: false
-          operation: create
-          status: completed
-          successLicenses:
-          - domain: example1.com
-            getLicenseURL: https://dashboard.accessibe.com/api/v1/partners/accounts/6655ffde924acc9586252c9e/access-widget-licenses/6655ffdaaf3c1a7b866ad60b
-            licenseId: 6655ffdaaf3c1a7b866ad60b
-          - domain: example2.com
-            getLicenseURL: https://dashboard.accessibe.com/api/v1/partners/accounts/6655ffde924acc9586252c9e/access-widget-licenses/6655ffdaaf3c1a7b866ad60c
-            licenseId: 6655ffdaaf3c1a7b866ad60c
-          failedLicenses: []
-          total: 2
-          totalFailures: 0
-          totalSuccesses: 2
-    LicenseUpdateRequestExample:
-      value:
-        domain: example.com
-        planSKU: 1
-        contactName: John Doe
-        contactEmail: john.doe@accessibe.com
-        contactPhone: '5551234567'
-        contactCountryCode: US
-        settings:
-          default: false
-          leadColor: '#146FF8'
-          language: en
-          position: right
-          triggerColor: '#146FF8'
-          triggerPositionX: right
-          triggerPositionY: bottom
-          triggerSize: medium
-          triggerRadius: 50%
-          hideTrigger: false
-          triggerOffsetX: 20
-          triggerOffsetY: 20
-          triggerIcon: people
-          hideMobile: false
-          mobile:
-            triggerPositionX: right
-            triggerPositionY: bottom
-            triggerSize: small
-            triggerRadius: 50%
-            triggerOffsetX: 10
-            triggerOffsetY: 10
-          statementLink: ''
-          footerHtml: ''
-    BatchLicenseUpdateRequestExample:
-      value:
-        licenses:
-        - domain: example1.com
-          newDomain: test1.com
-          planSKU: 1
-          contactName: John Doe
-          contactEmail: johndoe@accessibe.com
-          contactPhone: '5551234567'
-          contactCountryCode: US
-          discountEnabled: true
-          monthly: false
-          activate: true
-          settings:
-            default: false
-            position: right
-        - domain: example2.com
-          newDomain: test2.com
-          planSKU: 2
-          contactName: Jane Doe
-          contactEmail: janedoe@accessibe.com
-          contactPhone: '5557654321'
-          contactCountryCode: US
-    BatchLicenseCreateResponseExample:
-      value:
-        success: true
-        data:
-          batchId: 6655ffdaaf3c1a7b866ad60b
-          status: processing
-          operation: create
-          getBatchStatusURL: https://dashboard.accessibe.com/api/v1/partners/accounts/6655ffde924acc9586252c9e/access-widget-licenses/batch/6655ffdaaf3c1a7b866ad60b
-    ManyLicensesExample:
-      value:
-        success: true
-        data:
-          total: 1
-          nextToken: 6140cdf15d3df50b78eeadd5
-          licenses:
-          - id: 6655ffdaaf3c1a7b866ad60b
-            date: 2023-12-01 00:00:00+00:00
-            relatedAccountId: 6655ffde924acc9586252c9e
-            domain: example.com
-            status: active
-            price: 100
-            licenseType: offline
-            plan:
-              name: Standard
-              planSKU: 1
-            relatedBillingId: 6655ffc7ff28ed0683f30ca3
-            statementDate: 2023-12-01 00:00:00+00:00
-            dateTrialExpires: 2024-01-01 00:00:00+00:00
-            datePlanExpires: 2024-12-01 00:00:00+00:00
-            datePlanFirstActivated: 2023-12-01 00:00:00+00:00
-            lastSubscriptionPaymentId: 6655ffce1a84015a561e119b
-            enableGoogleAnalytics: true
-            enableRemediationReport: true
-            monthly: false
-            autoRenew: true
-            contactName: John Doe
-            contactEmail: john.doe@example.com
-            contactPhone: 5551234567
-            contactCountry: United States
-            settings:
-              leadColor: '#146FF8'
-              language: en
-              position: right
-              triggerColor: '#146FF8'
-              triggerPositionX: right
-              triggerPositionY: bottom
-              triggerSize: medium
-              triggerRadius: 50%
-              hideTrigger: false
-              triggerOffsetX: 20
-              triggerOffsetY: 20
-              triggerIcon: people
-              hideMobile: false
-              mobile:
-                triggerPositionX: right
-                triggerPositionY: bottom
-                triggerSize: small
-                triggerRadius: 50%
-                triggerOffsetX: 10
-                triggerOffsetY: 10
-              statementLink: ''
-              footerHtml: ''
-            maxImagesReached: false
-            maxImagesLimit: 5000
-    SingleLicenseExample:
-      value:
-        success: true
-        data:
-        - id: 6655ffdaaf3c1a7b866ad60b
-          date: 2023-12-01 00:00:00+00:00
-          relatedAccountId: 6655ffde924acc9586252c9e
-          domain: example.com
-          status: active
-          price: 100
-          licenseType: offline
-          plan:
-            name: Standard
-            planSKU: 1
-          relatedBillingId: 6655ffc7ff28ed0683f30ca3
-          statementDate: 2023-12-01 00:00:00+00:00
-          dateTrialExpires: 2024-01-01 00:00:00+00:00
-          datePlanExpires: 2024-12-01 00:00:00+00:00
-          datePlanFirstActivated: 2023-12-01 00:00:00+00:00
-          lastSubscriptionPaymentId: 6655ffce1a84015a561e119b
-          enableGoogleAnalytics: true
-          enableRemediationReport: true
-          monthly: false
-          autoRenew: true
-          contactName: John Doe
-          contactEmail: john.doe@example.com
-          contactPhone: 5551234567
-          contactCountry: United States
-          settings:
-            leadColor: '#146FF8'
-            language: en
-            position: right
-            triggerColor: '#146FF8'
-            triggerPositionX: right
-            triggerPositionY: bottom
-            triggerSize: medium
-            triggerRadius: 50%
-            hideTrigger: false
-            triggerOffsetX: 20
-            triggerOffsetY: 20
-            triggerIcon: people
-            hideMobile: false
-            mobile:
-              triggerPositionX: right
-              triggerPositionY: bottom
-              triggerSize: small
-              triggerRadius: 50%
-              triggerOffsetX: 10
-              triggerOffsetY: 10
-            statementLink: ''
-            footerHtml: ''
-          maxImagesReached: false
-          maxImagesLimit: 5000
   parameters:
     ExpandSettingsParam:
       name: expand[]
