@@ -1,0 +1,26 @@
+slug: accessibe
+provider: accessiBe
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Accounts
+  spec_file: accessibe-accounts-api-openapi.yml
+  capability_id: BC-4240
+  capability_id_l1: BC-4240
+  capability_name: Subscription Lifecycle Management
+  confidence: 0.75
+  evidence: '''This API allows partners to manage access widget licenses for their accounts''; POST /accounts/{accountId}/access-widget-licenses
+    ''Create an accessWidget license''; schemas License, Plan, UpdateLicense'
+  reason: Despite the 'Accounts' tag, the operations create, update and batch-provision product licenses
+    tied to Plans for partner-managed accounts — subscription/entitlement lifecycle for a SaaS product.
+    Not confident which sub-capability (provisioning vs modification), so L1 only.
