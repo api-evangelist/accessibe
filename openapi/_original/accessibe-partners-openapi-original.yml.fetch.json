@@ -1,0 +1,12 @@
+{
+ "url": "https://dashboard.accessibe.com/api/v1/partners/open-api/partners.yaml",
+ "requested_url": "https://dashboard.accessibe.com/api/v1/partners/open-api/partners.yaml",
+ "status": 200,
+ "content_type": "text/yaml; charset=UTF-8",
+ "bytes": 50514,
+ "sha256": "28680bf135af3c00cb21e97b95dee45b11c14c69dad2dc1bd31cd45ff74a1eea",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
