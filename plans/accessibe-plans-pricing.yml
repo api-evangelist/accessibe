@@ -1,0 +1,69 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://accessibe.com/pricing/accesswidget
+sources:
+- https://accessibe.com/pricing/accesswidget
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-07'
+  managed_tier: Micro
+published: true
+note: Plans priced by monthly website traffic (Similarweb averages). API & batch management listed as
+  a feature but not separately priced.
+plan_count: 7
+currency: USD
+plans:
+- name: Micro
+  price_text: $59 /month
+  price: 59
+  currency: USD
+  period: month
+  unit: website
+  included_quota: Up to 5,000 website visits/month
+- name: Micro (yearly)
+  price_text: $490 /year
+  price: 490
+  currency: USD
+  period: year
+  unit: website
+  included_quota: Up to 5,000 website visits/month
+- name: Growth
+  price_text: $179 /month
+  price: 179
+  currency: USD
+  period: month
+  unit: website
+  included_quota: Up to 30,000 website visits/month
+- name: Growth (yearly)
+  price_text: $1,490 /year
+  price: 1490
+  currency: USD
+  period: year
+  unit: website
+  included_quota: Up to 30,000 website visits/month
+- name: Scale
+  price_text: $479 /month
+  price: 479
+  currency: USD
+  period: month
+  unit: website
+  included_quota: Up to 100,000 website visits/month
+- name: Scale (yearly)
+  price_text: $3,990 /year
+  price: 3990
+  currency: USD
+  period: year
+  unit: website
+  included_quota: Up to 100,000 website visits/month
+- name: Enterprise
+  price_text: Custom
+  period: none
+  included_quota: Above 100,000 website visits/month
