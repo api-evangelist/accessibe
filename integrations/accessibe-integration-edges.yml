@@ -2,6 +2,7 @@ generated: '2026-10-14'
 method: searched
 checked:
 - square/integrations/square-integration-edges.yml
+- wordpress/integrations/wordpress-integration-edges.yml
 source:
 - square/integrations/square-integration-edges.yml
 edges:
@@ -22,3 +23,20 @@ edges:
   detected: '2026-10-14'
   detected_by: mirror-platform-listings.py
   category: New apps
+- partner_name: WordPress (own)
+  partner: wordpress
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://wordpress.org/plugins/accessibe/
+  mirror_of: wordpress/integrations/wordpress-integration-edges.yml
+  apps:
+  - Web Accessibility by accessiBe
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: WordPress plugin
