@@ -3,6 +3,7 @@ method: searched
 checked:
 - square/integrations/square-integration-edges.yml
 - wordpress/integrations/wordpress-integration-edges.yml
+- wix/integrations/wix-integration-edges.yml
 source:
 - square/integrations/square-integration-edges.yml
 edges:
@@ -40,3 +41,22 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: WordPress plugin
+- partner_name: Wix (own)
+  partner: wix
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.wix.com/app-market/developer/accessibe
+  mirror_of: wix/integrations/wix-integration-edges.yml
+  apps:
+  - 'accessiBe: Web Accessibility'
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Banners & Badges
+  publisher_verified:
+  - Verified by Wix
