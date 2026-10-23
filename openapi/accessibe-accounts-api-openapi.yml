@@ -1778,3 +1778,9 @@ components:
       in: header
       name: X-API-Key
       description: API key generated for the account
+x-provenance:
+  method: harvested
+  publisher: accessiBe
+  source: https://dashboard.accessibe.com/api/v1/partners/open-api/partners.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
