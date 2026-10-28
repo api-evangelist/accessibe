@@ -64,37 +64,124 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-accessiBe is a web accessibility technology company whose products help organizations make websites and web applications usable by people with disabilities and compliant with WCAG, the ADA, Section 508, AODA and the European Accessibility Act. Its portfolio spans accessWidget (an AI-driven remediation layer and end-user accessibility interface installed via an embed script), accessScan (a free single-URL compliance checker), accessFlow (a developer-first accessibility testing and monitoring platform with an SDK for Playwright, Cypress and Selenium plus CI/CD integrations), and accessServices (expert audits, user testing by people with disabilities, file and PDF remediation, and VPAT authoring).
+accessiBe is a web accessibility technology company whose products help organizations make websites and web applications usable by people with disabilities and compliant with WCAG, the ADA, Section 508, AODA and the European Accessibility Act. Its portfolio spans accessWidget (an AI-driven remediation layer and end-user accessibility interface installed via an embed script), accessScan (a free single-URL compliance checker), accessFlow (a developer-first accessibility testing and monitoring platform with an SDK for Playwright, Cypress and Selenium plus CI/CD integrations), and accessServices (expert audits, user testing by people with disabilities, file and PDF remediation, and VPAT authoring). Developer surfaces include a documented Partners API for programmatic accessWidget license management and a first-party accessFlow MCP server that connects IDE AI assistants to accessibility audit findings and remediation guidance.
 
-- Website: https://accessibe.com
-- Support: https://accessibe.com/support
-- Status: https://status.accessibe.com
-- Trust center: https://trust.accessibe.com
+**Areas:** Company · Accessibility · Web Accessibility · WCAG · ADA Compliance · Compliance · Developer Tools · Testing · Quality Assurance · Artificial Intelligence
 
-## APIs
+## accessiBe on APIs.io
 
-| API | Docs | Base URL | Auth |
-|---|---|---|---|
-| Partners API License 1.0.1 | https://dashboard.accessibe.com/api/v1/partners/docs | https://dashboard.accessibe.com/api/v1/partners | `x-api-key` header (partner account) |
-| accessFlow MCP Server (beta) | https://www.npmjs.com/package/accessflow-mcp-server | https://flow-mcp.accessibe.com/mcp | Bearer AI MCP token + `X-Domain` |
+Everything profiled for accessiBe is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/accessibe/](https://apis.io/providers/accessibe/)** — or go straight to one of the APIs or properties below.
 
-The Partners API covers accessWidget license lifecycle management: create, read, list,
-filter and update licenses, plus asynchronous batch create/update of up to 150 licenses
-with a batch status endpoint. It supports cursor pagination (`nextToken` + `limit`),
-`expand[]=settings` field expansion, and an `Idempotency-Key` header on the batch
-endpoints.
+### APIs (2)
 
-The accessFlow MCP server exposes three tools — `getMostUrgentIssues`,
-`getIssueRemediation` and `resolveIssue` — over stdio and hosted HTTP transports. It has
-no REST equivalent; see `mcp/accessibe-tool-crosswalk.yml`.
+- [accessFlow MCP Server](https://apis.io/apis/accessibe/accessflow-mcp/) — The accessFlow Model Context Protocol server connects AI clients such as GitHub Copilot and Cursor directly to accessFlow accessibility data. It exposes…
+- [accessiBe Accounts API](https://apis.io/apis/accessibe/accessibe-accounts-api/) — The Accounts API from accessiBe — 5 operation(s) for accounts.
 
-## Artifacts
+### Published properties
 
-`openapi/` `overlays/` `mcp/` `skills/` `packages/` `llms/` `authentication/`
-`conventions/` `errors/` `lifecycle/` `changelog/` `conformance/` `data-model/`
-`components/` `security/` `agentic-access/` `well-known/`
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-No A2A agent card, no AsyncAPI or first-party webhook surface, no `/.well-known/`
-discovery documents, no public vulnerability-disclosure program and no OAuth surface
-were found. Those absences are recorded in the relevant artifacts rather than
-manufactured.
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [flow-mcp](https://apis.io/servers/accessibe/flow-mcp/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Accessibe Agentic Access](https://apis.io/agentic-access/accessibe/accessibe-agentic-access/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Accessibe Partners Overlay](https://apis.io/overlays/accessibe/accessibe-partners-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Accessibe Authentication](https://apis.io/security/accessibe/accessibe-authentication/)
+- [Accessibe Domain Security](https://apis.io/security/accessibe/accessibe-domain-security/)
+- [Accessibe Trust Center](https://apis.io/security/accessibe/accessibe-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Accessibe Plans Pricing](https://apis.io/plans/accessibe/accessibe-plans-pricing/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://accessibe.com)
+- [Documentation](https://accessibe.com/support)
+- [Getting started](https://accessibe.com/accessflow-integrate)
+- [API reference](https://dashboard.accessibe.com/api/v1/partners/docs)
+- [Pricing](https://accessibe.com/pricing/accesswidget)
+- [Sign up](https://dashboard.accessibe.com/app/signup)
+- [Support](https://accessibe.com/support)
+- [Changelog](https://support.accessibe.com/hc/en-us/categories/15274937179922-Release-Notes)
+- [Blog](https://accessibe.com/blog)
+- [Compliance](https://accessibe.com/security)
+- [Terms of service](https://accessibe.com/terms-of-service)
+- [Privacy policy](https://accessibe.com/privacy-notice)
+- [Status](https://status.accessibe.com)
+
+## API Evangelist rating
+
+**Kin Score 52.1** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 51.4 |
+| Contract governance | 4.5 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 49.4 |
+| Access clarity | 85.5 |
+
+**Agent readiness 45.2** — agent-native
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | verified |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 27.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/accessibe/](https://apis.io/providers/accessibe/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for accessiBe: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/accessibe/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
